@@ -3,19 +3,25 @@ import App from "next/app";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-next-router";
 import withRedux from "next-redux-wrapper";
+import { compose } from "redux";
+import { ApolloProvider } from "@apollo/react-hooks";
 
-import { AppLayout } from "../App/Layout/Layout";
-import { makeStore } from "../App/State/store";
+import { AppLayout } from "../src/App/Layout/Layout";
+import { makeStore } from "../src/App/State/store";
+import { withApollo } from "../src/graphql/withApollo";
 
 import "antd/dist/antd.min.css";
 
-function MyApp({ Component, pageProps, store }) {
+function MyApp({ Component, pageProps, store, apolloClient }) {
+  console.log({ apolloClient });
   return (
     <Provider store={store}>
       <ConnectedRouter>
-        <AppLayout>
-          <Component {...pageProps} />
-        </AppLayout>
+        <ApolloProvider client={apolloClient}>
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
+        </ApolloProvider>
       </ConnectedRouter>
     </Provider>
   );
@@ -27,4 +33,4 @@ MyApp.getInitialProps = async (appContext) => {
   return { ...appProps };
 };
 
-export default withRedux(makeStore)(MyApp);
+export default compose(withApollo, withRedux(makeStore))(MyApp);

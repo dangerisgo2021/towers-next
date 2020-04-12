@@ -1,0 +1,18 @@
+projects:
+  Towers-Next-Appsync:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: src/graphql
+        region: us-east-2
+        apiId: grci7ukh4ngw5bavxiaood4w5m
+        maxDepth: 5
+extensions:
+  amplify:
+    version: 3

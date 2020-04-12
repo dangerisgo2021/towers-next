@@ -1,0 +1,17 @@
+{
+    "projectName": "towers",
+    "version": "3.0",
+    "frontend": "javascript",
+    "javascript": {
+        "framework": "none",
+        "config": {
+            "SourceDir": "graphql",
+            "DistributionDir": "dist",
+            "BuildCommand": "graphql:build",
+            "StartCommand": "graphql:start"
+        }
+    },
+    "providers": [
+        "awscloudformation"
+    ]
+}

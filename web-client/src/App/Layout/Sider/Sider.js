@@ -48,7 +48,7 @@ export const Sider = ({ children }) => {
   const { isLocked, isCollapsed, handleBreak } = useContainer(ref);
   return (
     <AntSider
-      breakpoint="md"
+      breakpoint="lg"
       collapsedWidth="0"
       collapsed={!isLocked && isCollapsed}
       trigger={null}

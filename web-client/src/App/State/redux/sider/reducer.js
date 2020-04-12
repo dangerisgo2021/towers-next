@@ -1,6 +1,5 @@
 import ReducerBuilder from "../utils/factories/ReducerBuilder";
 import { setKeyToValue } from "../utils/reducers/setKeyToValue";
-import { setKeyToPayload } from "../utils/reducers/setKeyToPayload";
 import { collapseSider, expandSider, sliderBreak } from "./actions";
 
 export const reducer = new ReducerBuilder()
