@@ -8,11 +8,12 @@ import { ApolloProvider } from "@apollo/react-hooks";
 
 import { AppLayout } from "../src/App/Layout/Layout";
 import { makeStore } from "../src/App/State/store";
-import { withApollo } from "../src/graphql/withApollo";
+import { withApollo } from "../src/apollo/withApollo";
 
 import "antd/dist/antd.min.css";
 
 function MyApp({ Component, pageProps, store, apolloClient }) {
+  console.log({ apolloClient });
   return (
     <Provider store={store}>
       <ConnectedRouter>

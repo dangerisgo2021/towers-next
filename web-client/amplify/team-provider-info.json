@@ -10,6 +10,11 @@
             "StackName": "amplify-towers-local-223333",
             "StackId": "arn:aws:cloudformation:us-east-1:962345470753:stack/amplify-towers-local-223333/fd0bede0-7c65-11ea-83a1-0a0faac5843d",
             "AmplifyAppId": "d3ptipxjoiunr3"
+        },
+        "categories": {
+            "auth": {
+                "towers62135781": {}
+            }
         }
     }
 }

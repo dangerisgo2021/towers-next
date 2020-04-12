@@ -19,11 +19,11 @@ const booksQuery = gql`
 
 const useBookContainer = () => {
   const { loading, error, data } = useQuery(booksQuery);
+  console.log({ loading, error, data });
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
-  console.log({ data });
   return {
     columns: [
       {

@@ -1,1 +1,10 @@
-{}
+{
+	"auth": {
+		"towers62135781": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}
