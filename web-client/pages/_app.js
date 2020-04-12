@@ -13,7 +13,6 @@ import { withApollo } from "../src/apollo/withApollo";
 import "antd/dist/antd.min.css";
 
 function MyApp({ Component, pageProps, store, apolloClient }) {
-  console.log({ apolloClient });
   return (
     <Provider store={store}>
       <ConnectedRouter>
