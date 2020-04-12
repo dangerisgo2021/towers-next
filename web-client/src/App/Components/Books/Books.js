@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "antd";
 import gql from "graphql-tag";
-import { get } from "lodash";
+import get from "lodash.get";
 import { useQuery } from "@apollo/react-hooks";
 
 const defaultBooks = [];
