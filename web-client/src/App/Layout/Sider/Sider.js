@@ -1,7 +1,10 @@
 import React from "react";
 import { Layout } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { collapseSider, sliderBreak } from "../../State/redux/sider/actions";
+import { useDispatch, useSelector, useStore } from "react-redux";
+import {
+  clickedOutsideExpandedSider,
+  sliderBreak,
+} from "../../State/redux/sider/actions";
 import {
   getIsSiderCollapsed,
   getIsSiderLocked,
@@ -10,8 +13,8 @@ import {
 const { Sider: AntSider } = Layout;
 
 const useContainer = (ref) => {
+  const store = useStore();
   const dispatch = useDispatch();
-  const isCollapsed = useSelector(getIsSiderCollapsed);
   const handleBreak = (broken) => {
     dispatch(sliderBreak(broken));
   };
@@ -22,8 +25,12 @@ const useContainer = (ref) => {
      * Alert if clicked on outside of element
      */
     function handleClickOutside(event) {
+      const state = store.getState();
+      const isCollapsed = getIsSiderCollapsed(state);
+      console.log({ isCollapsed, expanded: !isCollapsed });
+
       if (!isCollapsed && ref.current && !ref.current.contains(event.target)) {
-        dispatch(collapseSider());
+        dispatch(clickedOutsideExpandedSider());
       }
     }
 
@@ -37,7 +44,7 @@ const useContainer = (ref) => {
   }, [ref]);
 
   return {
-    isCollapsed,
+    isCollapsed: useSelector(getIsSiderCollapsed),
     isLocked,
     handleBreak,
   };

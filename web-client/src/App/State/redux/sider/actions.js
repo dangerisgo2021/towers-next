@@ -18,3 +18,8 @@ export const sliderBreak = actionCreatorFactory({
   type: "sliderBreak",
   creator: (broken) => broken,
 });
+
+export const clickedOutsideExpandedSider = actionCreatorFactory({
+  namespace,
+  type: "clickedOutsideExpandedSider"
+});

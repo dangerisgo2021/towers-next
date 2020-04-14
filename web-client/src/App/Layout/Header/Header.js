@@ -16,16 +16,27 @@ export const Header = () => {
   const {
     isSiderCollapsed,
     isSiderLocked,
-    handleMenuButtonClicked,
+    handleOpenMenuButtonClicked,
   } = useHeaderContainer();
   return (
     <AntHeader className={styles.header}>
       <Row justify="space-between">
-        <Button onClick={handleMenuButtonClicked}>
-          {isSiderLocked && <MenuOutlined />}
-          {!isSiderLocked &&
-            (isSiderCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />)}
-        </Button>
+        {isSiderLocked && (
+          <Button>
+            <MenuOutlined />
+          </Button>
+        )}
+        {!isSiderLocked &&
+          (isSiderCollapsed ? (
+            <Button onClick={handleOpenMenuButtonClicked}>
+              <MenuUnfoldOutlined />
+            </Button>
+          ) : (
+            <Button>
+              <MenuFoldOutlined />
+            </Button>
+          ))}
+        }
         <Avatar />
       </Row>
     </AntHeader>

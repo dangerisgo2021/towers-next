@@ -9,19 +9,23 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { AppLayout } from "../src/App/Layout/Layout";
 import { makeStore } from "../src/App/State/store";
 import { withApollo } from "../src/apollo/withApollo";
+import { Auth0Provider } from "../src/App/Auth/auth0/react-auth0-wrapper";
+import { auth0Config } from "../src/App/Auth/auth0/auth0.config";
 
 import "antd/dist/antd.min.css";
 
 function MyApp({ Component, pageProps, store, apolloClient }) {
   return (
     <Provider store={store}>
-      <ConnectedRouter>
-        <ApolloProvider client={apolloClient}>
-          <AppLayout>
-            <Component {...pageProps} />
-          </AppLayout>
-        </ApolloProvider>
-      </ConnectedRouter>
+      <Auth0Provider {...auth0Config}>
+        <ConnectedRouter>
+          <ApolloProvider client={apolloClient}>
+            <AppLayout>
+              <Component {...pageProps} />
+            </AppLayout>
+          </ApolloProvider>
+        </ConnectedRouter>
+      </Auth0Provider>
     </Provider>
   );
 }

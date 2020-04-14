@@ -3,7 +3,7 @@ const {
 } = require("../utils/factories/actionCreatorFactory");
 const namespace = "header";
 
-export const menuButtonClicked = actionCreatorFactory({
+export const openMenuButtonClicked = actionCreatorFactory({
   namespace,
-  type: "menuButtonClicked",
+  type: "openMenuButtonClicked"
 });
