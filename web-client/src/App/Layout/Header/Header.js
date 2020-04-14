@@ -6,7 +6,6 @@ import {
   MenuOutlined,
 } from "@ant-design/icons";
 
-import styles from "./Header.module.css";
 import { Avatar } from "../../Components/Avatar/Avatar";
 import { useHeaderContainer } from "./useHeaderContainer";
 
@@ -18,21 +17,25 @@ export const Header = () => {
     isSiderLocked,
     handleOpenMenuButtonClicked,
   } = useHeaderContainer();
+  // need to manually set keys on button to prevent
+  // React from reusing the button with the click event
+
   return (
-    <AntHeader className={styles.header}>
-      <Row justify="space-between">
+    <AntHeader>
+      <Row justify="space-between" align="middle">
         {isSiderLocked && (
-          <Button>
+          <Button key="0">
+            {" "}
             <MenuOutlined />
           </Button>
         )}
         {!isSiderLocked &&
           (isSiderCollapsed ? (
-            <Button onClick={handleOpenMenuButtonClicked}>
+            <Button key="1" onClick={handleOpenMenuButtonClicked}>
               <MenuUnfoldOutlined />
             </Button>
           ) : (
-            <Button>
+            <Button key="2">
               <MenuFoldOutlined />
             </Button>
           ))}

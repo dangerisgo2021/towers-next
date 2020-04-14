@@ -27,8 +27,6 @@ const useContainer = (ref) => {
     function handleClickOutside(event) {
       const state = store.getState();
       const isCollapsed = getIsSiderCollapsed(state);
-      console.log({ isCollapsed, expanded: !isCollapsed });
-
       if (!isCollapsed && ref.current && !ref.current.contains(event.target)) {
         dispatch(clickedOutsideExpandedSider());
       }
