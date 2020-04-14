@@ -9,7 +9,7 @@ export const useHeaderContainer = () => {
   const dispatch = useDispatch();
   const isSiderCollapsed = useSelector(getIsSiderCollapsed);
   const isSiderLocked = useSelector(getIsSiderLocked);
-  console.log("useHeaderContainer", { isSiderCollapsed });
+
   return {
     isSiderCollapsed,
     isSiderLocked,
