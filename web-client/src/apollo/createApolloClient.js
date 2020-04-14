@@ -2,7 +2,7 @@ import AWSAppSyncClient from "aws-appsync";
 import appSyncConfig from "../graphql/aws-exports";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-export const createServerApolloClient = (initialState) => {
+export const createApolloClient = (initialState) => {
   return new AWSAppSyncClient(
     {
       url: appSyncConfig.aws_appsync_graphqlEndpoint,
