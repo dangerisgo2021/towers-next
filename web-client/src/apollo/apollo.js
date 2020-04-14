@@ -7,7 +7,7 @@ if (isServer) {
   global.fetch = fetch;
 }
 
-let apolloClient = null;
+export let apolloClient = null;
 
 export const initApollo = (initialState) => {
   // Make sure to create a new client for every server-side request so that data

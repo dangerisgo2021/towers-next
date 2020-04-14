@@ -1,5 +1,5 @@
 import React from "react";
-import { initApollo } from "./initApollo";
+import { initApollo } from "./apollo";
 
 export const withApollo = (App) => {
   return class Apollo extends React.Component {

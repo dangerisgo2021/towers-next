@@ -1,5 +1,6 @@
 import React from "react";
+import { Row } from "antd";
 
-const Rules = () => <div style={{ height: "1000px" }}> Rules</div>;
+const Rules = () => <Row> Rules</Row>;
 
 export default Rules;

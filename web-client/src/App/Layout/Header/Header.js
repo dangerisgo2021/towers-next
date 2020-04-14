@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Layout, Row } from "antd";
+import { Button, Layout, Row, Col } from "antd";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -21,27 +21,28 @@ export const Header = () => {
   // React from reusing the button with the click event
 
   return (
-    <AntHeader>
-      <Row justify="space-between" align="middle">
-        {isSiderLocked && (
-          <Button key="0">
-            {" "}
-            <MenuOutlined />
-          </Button>
-        )}
-        {!isSiderLocked &&
-          (isSiderCollapsed ? (
-            <Button key="1" onClick={handleOpenMenuButtonClicked}>
-              <MenuUnfoldOutlined />
+    <AntHeader style={{padding: "2vw"}}>
+      <Col>
+        <Row justify="space-between" align="middle">
+          {isSiderLocked && (
+            <Button key="0">
+              {" "}
+              <MenuOutlined />
             </Button>
-          ) : (
-            <Button key="2">
-              <MenuFoldOutlined />
-            </Button>
-          ))}
-        }
-        <Avatar />
-      </Row>
+          )}
+          {!isSiderLocked &&
+            (isSiderCollapsed ? (
+              <Button key="1" onClick={handleOpenMenuButtonClicked}>
+                <MenuUnfoldOutlined />
+              </Button>
+            ) : (
+              <Button key="2">
+                <MenuFoldOutlined />
+              </Button>
+            ))}
+          <Avatar />
+        </Row>
+      </Col>
     </AntHeader>
   );
 };

@@ -1,19 +1,24 @@
 import React from "react";
 import { Menu } from "antd";
+import Link from "next/link";
+import { useSelector } from "react-redux";
+import { getSiderNavItems } from "../../State/redux/nav/selectors";
 
-export const SiderMenu = () => (
+const SiderMenuRender = ({ navItems = [] }) => (
   <Menu theme="dark">
-    <Menu.Item key="1">
-      <span className="nav-text">nav 1</span>
-    </Menu.Item>
-    <Menu.Item key="2">
-      <span className="nav-text">nav 2</span>
-    </Menu.Item>
-    <Menu.Item key="3">
-      <span className="nav-text">nav 3</span>
-    </Menu.Item>
-    <Menu.Item key="4">
-      <span className="nav-text">nav 4</span>
-    </Menu.Item>
+    {navItems.map(({ id, href, displayText }) => (
+      <Menu.Item key={id}>
+        <Link href={href}>
+          <a>
+            <span className="nav-text">{displayText}</span>
+          </a>
+        </Link>
+      </Menu.Item>
+    ))}
   </Menu>
 );
+
+export const SiderMenu = () => {
+  const navItems = useSelector(getSiderNavItems) || [];
+  return <SiderMenuRender navItems={navItems} />;
+};

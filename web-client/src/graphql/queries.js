@@ -1,24 +1,61 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getBooks = /* GraphQL */ `
-  query GetBooks($id: ID!) {
-    getBooks(id: $id) {
+export const getProfile = /* GraphQL */ `
+  query GetProfile($id: ID!) {
+    getProfile(id: $id) {
       id
-      title
+      agentId
+      username
+      rating
+      email
     }
   }
 `;
-export const listBooks = /* GraphQL */ `
-  query ListBooks(
-    $filter: TableBooksFilterInput
+export const listProfiles = /* GraphQL */ `
+  query ListProfiles(
+    $filter: TableProfileFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listBooks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listProfiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        title
+        agentId
+        username
+        rating
+        email
+      }
+      nextToken
+    }
+  }
+`;
+export const getMatch = /* GraphQL */ `
+  query GetMatch($id: ID!) {
+    getMatch(id: $id) {
+      id
+      created
+      updated
+      player1
+      player2
+      boardId
+    }
+  }
+`;
+export const listMatches = /* GraphQL */ `
+  query ListMatches(
+    $filter: TableMatchFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMatches(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        created
+        updated
+        player1
+        player2
+        boardId
       }
       nextToken
     }

@@ -6,7 +6,11 @@ const awsmobile = {
     "aws_cognito_region": "us-east-1",
     "aws_user_pools_id": "us-east-1_7YbWhApXk",
     "aws_user_pools_web_client_id": "1sgnknj91rgnk687gisf8jdaho",
-    "oauth": {}
+    "oauth": {},
+    "aws_appsync_graphqlEndpoint": "https://rdvla36r7rdkti5cbvkxa4opie.appsync-api.us-east-1.amazonaws.com/graphql",
+    "aws_appsync_region": "us-east-1",
+    "aws_appsync_authenticationType": "API_KEY",
+    "aws_appsync_apiKey": "da2-67hxwc66vfc7vc5ypqlzw7vwom"
 };
 
 

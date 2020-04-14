@@ -1,4 +1,4 @@
-import { actionCreatorFactory } from "../State/redux/utils/factories/actionCreatorFactory";
+import { actionCreatorFactory } from "../utils/factories/actionCreatorFactory";
 
 const namespace = "auth";
 

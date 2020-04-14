@@ -1,11 +1,6 @@
 import React from "react";
-import {  Row } from "antd";
-import { Books } from "../src/App/Components/Books/Books";
+import { Row } from "antd";
 
-const Home = () => (
-  <Row>
-    <Books />
-  </Row>
-);
+const Home = () => <Row>Home</Row>;
 
 export default Home;
