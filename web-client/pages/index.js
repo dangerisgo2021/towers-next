@@ -1,6 +1,5 @@
 import React from "react";
-import { Row } from "antd";
 
-const Home = () => <Row>Home</Row>;
+import { Home } from "../src/App/Layout/Pages/Home";
 
 export default Home;

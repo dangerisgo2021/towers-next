@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "antd";
-import { Content } from "./Content";
+import { Content } from "./Content/Content";
 import { Footer } from "./Footer";
 import { Header } from "./Header/Header";
 import { Sider } from "./Sider/Sider";

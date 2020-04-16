@@ -58,6 +58,7 @@ export const Sider = ({ children }) => {
       collapsed={!isLocked && isCollapsed}
       trigger={null}
       onBreakpoint={handleBreak}
+      style={{ position: "absolute", top: "64px" }}
     >
       <div ref={ref}>{children}</div>
     </AntSider>

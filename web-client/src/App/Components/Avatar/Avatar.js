@@ -9,9 +9,12 @@ import { userReceived } from "../../State/redux/auth/actions";
 
 const AvatarRender = ({ user, loginWithRedirect, logout, name, loading }) => {
   return user ? (
-    <AntAvatar onClick={() => !loading && logout()}>{name}</AntAvatar>
+    <AntAvatar size="large" onClick={() => !loading && logout()}>
+      {name}
+    </AntAvatar>
   ) : (
     <AntAvatar
+      size="large"
       icon={<UserOutlined onClick={() => !loading && loginWithRedirect({})} />}
     />
   );

@@ -1,24 +1,24 @@
+const {messagesTypeDef} = require("./App/messages/messagesTypeDef");
 const { gql } = require("apollo-server-express");
 
 // Construct a schema, using GraphQL schema language
-exports.typeDefs = gql`
-
+const rootTypeDef = gql`
   input Range {
     start: Int
     end: Int
   }
-  
+
   type Query {
-    hello: String
-    messages: [String!]!
+    _empty: String
+    ping: String
   }
 
   type Mutation {
-    addMessage(message: String!): [String!]!
+    ping: String
   }
 
   type Subscription {
-    newMessage: String!
+    empty: String
   }
 
   schema {
@@ -27,3 +27,4 @@ exports.typeDefs = gql`
     subscription: Subscription
   }
 `;
+exports.typeDefs = [rootTypeDef, messagesTypeDef]
