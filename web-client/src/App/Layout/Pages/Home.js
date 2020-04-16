@@ -1,3 +1,21 @@
 import React from "react";
+import { useQuery } from "@apollo/client";
+import { messagesQuery } from "../../../apollo/queries/messagesQuery";
 
-export const Home = () => (<div>I am home</div>)
+const useHomeContainer = () => {
+  const { data, loading, error } = useQuery(messagesQuery);
+
+  return {
+    data,
+    loading,
+    error,
+  };
+};
+export const Home = () => {
+  const { data, loading, error } = useHomeContainer();
+
+  if (loading) return "loading";
+  if (error) return JSON.stringify(error.message);
+
+  return <div>{JSON.stringify(data)}</div>;
+};

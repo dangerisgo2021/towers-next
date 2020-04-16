@@ -21,11 +21,10 @@ export const Header = () => {
   // React from reusing the button with the click event
 
   return (
-    <AntHeader style={{ padding: "2vw" }}>
+    <AntHeader style={{ padding: "1vw" }}>
       <Row justify="space-between" align="middle" style={{ height: "100%" }}>
         {isSiderLocked && (
           <Button key="0" size="large">
-            {" "}
             <MenuOutlined />
           </Button>
         )}

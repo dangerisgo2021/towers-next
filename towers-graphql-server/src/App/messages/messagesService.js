@@ -17,11 +17,4 @@ exports.addMessage = async ({ text }) => {
   return newMessage;
 };
 
-exports.readMessages = async () => {
-  //add message to messages collection in db
-  const messages = await findMessages();
-  console.log({ messages });
-
-  //return added message
-  return messages;
-};
+exports.readMessages = async () => findMessages();
