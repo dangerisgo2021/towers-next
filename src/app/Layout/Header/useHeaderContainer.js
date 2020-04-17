@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getIsSiderCollapsed,
   getIsSiderLocked,
-} from "../../State/redux/sider/selectors";
-import { openMenuButtonClicked } from "../../State/redux/header/actions";
+} from "../../../state/redux/sider/selectors";
+import { openMenuButtonClicked } from "../../../state/redux/header/actions";
 
 export const useHeaderContainer = () => {
   const dispatch = useDispatch();

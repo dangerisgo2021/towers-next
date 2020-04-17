@@ -4,11 +4,11 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 import {
   clickedOutsideExpandedSider,
   sliderBreak,
-} from "../../State/redux/sider/actions";
+} from "../../../state/redux/sider/actions";
 import {
   getIsSiderCollapsed,
   getIsSiderLocked,
-} from "../../State/redux/sider/selectors";
+} from "../../../state/redux/sider/selectors";
 
 const { Sider: AntSider } = Layout;
 

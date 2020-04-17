@@ -2,7 +2,7 @@ import React from "react";
 import { Menu } from "antd";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { getSiderNavItems } from "../../State/redux/nav/selectors";
+import { getSiderNavItems } from "../../../state/redux/nav/selectors";
 
 const SiderMenuRender = ({ navItems = [] }) => (
   <Menu theme="dark">

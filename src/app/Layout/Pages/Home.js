@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { messagesQuery } from "../../../apollo/queries/messagesQuery";
+import { messagesQuery } from "../../../services/queries/messagesQuery";
 
 const useHomeContainer = () => {
   const { data, loading, error } = useQuery(messagesQuery);

@@ -6,11 +6,11 @@ import withRedux from "next-redux-wrapper";
 import { compose } from "redux";
 import { ApolloProvider } from "@apollo/client";
 
-import { AppLayout } from "../src/App/Layout/Layout";
-import { makeStore } from "../src/App/State/store";
-import { withApollo } from "../src/apollo/withApollo";
-import { Auth0Provider } from "../src/App/Auth/auth0/react-auth0-wrapper";
-import { auth0Config } from "../src/App/Auth/auth0/auth0.config";
+import { AppLayout } from "../src/app/Layout/Layout";
+import { makeStore } from "../src/state/store";
+import { withApollo } from "../src/services/withApollo";
+import { Auth0Provider } from "../src/app/Auth/auth0/react-auth0-wrapper";
+import { auth0Config } from "../src/app/Auth/auth0/auth0.config";
 
 import "antd/dist/antd.min.css";
 
