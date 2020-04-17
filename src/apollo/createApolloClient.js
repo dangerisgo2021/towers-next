@@ -4,7 +4,7 @@ export const createApolloClient = (initialState) => {
   return new ApolloClient({
     cache: new InMemoryCache().restore(initialState || {}),
     link: new HttpLink({
-      uri: "https://towers-268705.uc.r.appspot.com/graphql",
+      uri: "https://towers-graphql-server.herokuapp.com/graphql",
     }),
   });
 };
