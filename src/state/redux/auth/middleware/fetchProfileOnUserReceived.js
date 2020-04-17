@@ -1,32 +1,17 @@
-//import gql from "graphql-tag";
+import get from "lodash.get";
 import { userReceived } from "../actions";
-// import { apolloClient } from "../../../../../apollo/apollo";
-//
-// const getProfileByAgentIdQuery = gql`
-//   query getProfileByAgentId {
-//     listProfiles(
-//       limit: 1
-//       filter: { agentId: { eq: "xKKCxAGDlBh8vXURQBuZErAl9IsNuqmX" } }
-//     ) {
-//       items {
-//         id
-//         agentId
-//         username
-//       }
-//     }
-//   }
-// `;
-export const fetchProfileOnUserReceived = () => (next) => (action) => {
+import { apolloClient } from "../../../../services/apollo";
+import { profileQuery } from "../../../../services/queries/profileQuery";
+
+export const fetchProfileOnUserReceived = () => (next) => async (action) => {
   next(action);
 
   if (action.type === userReceived.type) {
-   
-    /*
-     console.log({ action, apolloClient });
-    apolloClient.query({ query: getProfileByAgentIdQuery });
-    
-    if no profile found create new profile based on user.sub
-    
-     */
+    const agentId = get(action, "payload.user.sub");
+    const { data } = await apolloClient.query({
+      query: profileQuery,
+      variables: { agentId },
+    });
+    console.log(data);
   }
 };
