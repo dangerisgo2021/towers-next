@@ -16,6 +16,7 @@
     "apollo-client": "2.6.8",
     "apollo-link": "^1.2.14",
     "connected-next-router": "^2.0.0-alpha.3",
+    "faker": "^4.1.0",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
     "isomorphic-unfetch": "^3.0.0",

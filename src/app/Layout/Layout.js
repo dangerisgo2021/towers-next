@@ -5,6 +5,7 @@ import { Footer } from "./Footer";
 import { Header } from "./Header/Header";
 import { Sider } from "./Sider/Sider";
 import { SiderMenu } from "./Sider/SiderMenu";
+import { Modals } from "./Modals";
 
 export const AppLayout = ({ children }) => (
   <Layout>
@@ -16,5 +17,6 @@ export const AppLayout = ({ children }) => (
       <Content>{children}</Content>
       <Footer />
     </Layout>
+    <Modals />
   </Layout>
 );

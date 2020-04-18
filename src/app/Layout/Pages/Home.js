@@ -1,21 +1,30 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
-import { messagesQuery } from "../../../services/queries/messagesQuery";
+import { Button, Col, Row } from "antd";
+import { OpenRoomTable } from "../../Components/OpenRoomTable/OpenRoomTable";
+import { createRoomButtonClicked } from "../../../state/redux/home/actions";
+import { useDispatch } from "react-redux";
 
 const useHomeContainer = () => {
-  const { data, loading, error } = useQuery(messagesQuery);
-
+  const dispatch = useDispatch();
   return {
-    data,
-    loading,
-    error,
+    createRoomButtonClicked: () => {
+      dispatch(createRoomButtonClicked());
+    },
   };
 };
+
 export const Home = () => {
-  const { data, loading, error } = useHomeContainer();
-
-  if (loading) return "loading";
-  if (error) return JSON.stringify(error.message);
-
-  return <div>{JSON.stringify(data)}</div>;
+  const { createRoomButtonClicked } = useHomeContainer();
+  return (
+    <Col style={{ padding: "2vw" }}>
+      <Row style={{ margin: "1vw 0" }}>
+        <Button block onClick={createRoomButtonClicked}>
+          Create Room
+        </Button>
+      </Row>
+      <Row>
+        <OpenRoomTable />
+      </Row>
+    </Col>
+  );
 };
