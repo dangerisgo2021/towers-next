@@ -24,9 +24,9 @@ const columns = [
     key: "time",
   },
   {
-    title: "Ranked",
-    dataIndex: "ranked",
-    key: "ranked",
+    title: "Mode",
+    dataIndex: "mode",
+    key: "mode",
   },
 ];
 const useOpenRoomTableContainer = () => {
@@ -37,7 +37,7 @@ const useOpenRoomTableContainer = () => {
     name: faker.random.word(),
     rating: faker.random.number({ min: 1400, max: 3200 }),
     time: faker.random.number({ min: 4, max: 9 }) + "min",
-    ranked: !!faker.random.boolean() ? "Ranked" : "Casual",
+    mode: !!faker.random.boolean() ? "Ranked" : "Casual",
   }));
   return {
     openRooms,

@@ -3,9 +3,9 @@ import { Avatar as AntAvatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import words from "lodash.words";
 
-import { useAuth0 } from "../../Auth/auth0/react-auth0-wrapper";
+import { useAuth0 } from "../Auth/auth0/react-auth0-wrapper";
 import { useDispatch } from "react-redux";
-import { userReceived } from "../../../state/redux/auth/actions";
+import { userReceived } from "../../state/redux/auth/actions";
 
 const AvatarRender = ({ user, loginWithRedirect, logout, name, loading }) => {
   return user ? (

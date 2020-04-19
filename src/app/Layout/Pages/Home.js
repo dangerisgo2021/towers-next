@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Col, Row } from "antd";
-import { OpenRoomTable } from "../../Components/OpenRoomTable/OpenRoomTable";
+import { OpenRoomTable } from "../../Components/OpenRoomTable";
 import { createRoomButtonClicked } from "../../../state/redux/home/actions";
 import { useDispatch } from "react-redux";
 

@@ -6,7 +6,7 @@ import {
   MenuOutlined,
 } from "@ant-design/icons";
 
-import { Avatar } from "../../Components/Avatar/Avatar";
+import { Avatar } from "../../Components/Avatar";
 import { useHeaderContainer } from "./useHeaderContainer";
 
 const { Header: AntHeader } = Layout;

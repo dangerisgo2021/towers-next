@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Radio, Modal } from "antd";
-import { getShowModal } from "../../../state/redux/modals/selectors/getShowModal";
-import { modalCanceled, modalOk } from "../../../state/redux/modals/actions";
-import { NAME } from "../../../state/redux/createRoomModal/consts";
-import { formValueChanged } from "../../../state/redux/forms/actions";
+import { getShowModal } from "../../state/redux/modals/selectors/getShowModal";
+import { modalCanceled, modalOk } from "../../state/redux/modals/actions";
+import { NAME } from "../../state/redux/createRoomModal/consts";
+import { formValueChanged } from "../../state/redux/forms/actions";
 
 const useCreateRoomModalContainer = () => {
   const dispatch = useDispatch();

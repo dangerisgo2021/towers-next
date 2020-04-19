@@ -1,5 +1,5 @@
 import React from "react";
-import {CreateRoomModal} from "../Components/OpenRoomTable/CreateRoomModal";
+import {CreateRoomModal} from "../Components/CreateRoomModal";
 
 export const Modals = () => (
   <div>
