@@ -7,3 +7,9 @@ export const createRoomButtonClicked = actionCreatorFactory({
   namespace,
   type: "createRoomButtonClicked",
 });
+
+export const openRoomsTableRowClicked = actionCreatorFactory({
+  namespace,
+  type: "openRoomsTableRowClicked",
+  creator: ({ roomId }) => ({ roomId }),
+});

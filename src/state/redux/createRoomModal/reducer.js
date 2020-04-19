@@ -1,12 +1,16 @@
 import React from "react";
+import faker from "faker";
 import ReducerBuilder from "../utils/factories/ReducerBuilder";
 
 import { formReducer } from "../forms/reducer";
 import { NAME } from "./consts";
 
+export const formInitialValue = {
+  values: { mode: "CASUAL", name: faker.random.word() },
+};
 const formConfig = {
   formName: NAME,
-  initialValue: { values: { mode: "casual", name: "" } },
+  initialValue: formInitialValue,
 };
 
 export const reducer = new ReducerBuilder()

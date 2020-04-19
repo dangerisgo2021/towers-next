@@ -7,6 +7,7 @@ import { collapseSliderOnOutsideExpandedSliderClick } from "./sider/middleware/c
 import { fetchProfileOnUserReceived } from "./auth/middleware/fetchProfileOnUserReceived";
 import { openCreateRoomModal } from "./createRoomModal/middleware/openCreateRoomModal";
 import { submitCreateRoomForm } from "./createRoomModal/middleware/submitCreateRoomForm";
+import { navigateToRoom } from "./home/middleware/navigateToRoom";
 
 export const middleware = [
   loggerMiddleware,
@@ -18,4 +19,5 @@ export const middleware = [
   fetchProfileOnUserReceived,
   openCreateRoomModal,
   submitCreateRoomForm,
+  navigateToRoom,
 ];

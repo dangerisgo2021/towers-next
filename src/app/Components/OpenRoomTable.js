@@ -1,27 +1,16 @@
 import React from "react";
 import { Table } from "antd";
-import faker from "faker";
+import get from "lodash.get";
+import { useQuery } from "@apollo/client";
+import { searchForOpenRooms } from "../../services/queries/searchForOpenRooms";
+import { useDispatch } from "react-redux";
+import { openRoomsTableRowClicked } from "../../state/redux/home/actions";
 
 const columns = [
-  {
-    title: "Id",
-    dataIndex: "id",
-    key: "id",
-  },
   {
     title: "Name",
     dataIndex: "name",
     key: "name",
-  },
-  {
-    title: "Rating",
-    dataIndex: "rating",
-    key: "rating",
-  },
-  {
-    title: "Time",
-    dataIndex: "time",
-    key: "time",
   },
   {
     title: "Mode",
@@ -30,32 +19,38 @@ const columns = [
   },
 ];
 const useOpenRoomTableContainer = () => {
-  const loading = false;
-  const error = null;
-  const openRooms = Array.from({ length: 4 }).map((_, i) => ({
-    id: i,
-    name: faker.random.word(),
-    rating: faker.random.number({ min: 1400, max: 3200 }),
-    time: faker.random.number({ min: 4, max: 9 }) + "min",
-    mode: !!faker.random.boolean() ? "Ranked" : "Casual",
-  }));
+  const { data, loading, error } = useQuery(searchForOpenRooms);
+  const dispatch = useDispatch();
+  const openRooms = get(data, "rooms.nodes");
+  const onRowClick = ({ record }) => {
+    dispatch(openRoomsTableRowClicked({ roomId: record.id }));
+  };
   return {
     openRooms,
     loading,
     error,
     columns,
+    onRowClick,
   };
 };
 
 export const OpenRoomTable = () => {
-  const { openRooms, columns } = useOpenRoomTableContainer();
-
+  const { openRooms = [], columns, onRowClick } = useOpenRoomTableContainer();
+  const onRow = (record) => {
+    return {
+      onClick: (event) => {
+        console.log({ event });
+        onRowClick({ record });
+      }
+    };
+  };
   return (
     <Table
       rowKey="id"
       columns={columns}
       dataSource={openRooms}
       pagination={false}
+      onRow={onRow}
       style={{ width: "100%" }}
     />
   );

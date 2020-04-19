@@ -5,6 +5,7 @@ import { getShowModal } from "../../state/redux/modals/selectors/getShowModal";
 import { modalCanceled, modalOk } from "../../state/redux/modals/actions";
 import { NAME } from "../../state/redux/createRoomModal/consts";
 import { formValueChanged } from "../../state/redux/forms/actions";
+import { getFormValues } from "../../state/redux/createRoomModal/selectors/getFormValues";
 
 const useCreateRoomModalContainer = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const useCreateRoomModalContainer = () => {
 
   return {
     form,
+    formValues: useSelector(getFormValues),
     show: useSelector(getShowModal),
     onCreateRoomModalCancel: () => {
       dispatch(modalCanceled({ modal: NAME }));
@@ -33,10 +35,12 @@ export const CreateRoomModal = () => {
   const {
     form,
     show,
+    formValues,
     onCreateRoomModalCancel,
     onCreateRoomModalOk,
     onCreateRoomFormValuesChange,
   } = useCreateRoomModalContainer();
+
   return (
     <Modal
       title="Create Room"
@@ -46,17 +50,15 @@ export const CreateRoomModal = () => {
     >
       <Form
         form={form}
-        initialValues={{
-          mode: "casual",
-        }}
+        initialValues={formValues}
         {...formItemLayout}
         layout="horizontal"
         onValuesChange={onCreateRoomFormValuesChange}
       >
         <Form.Item label="Mode" name="mode">
           <Radio.Group>
-            <Radio.Button value="casual">Casual</Radio.Button>
-            <Radio.Button value="ranked">Ranked</Radio.Button>
+            <Radio.Button value="CASUAL">Casual</Radio.Button>
+            <Radio.Button value="RANKED">Ranked</Radio.Button>
           </Radio.Group>
         </Form.Item>
         <Form.Item label="Name" name="name">

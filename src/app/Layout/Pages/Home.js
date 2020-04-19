@@ -16,7 +16,7 @@ const useHomeContainer = () => {
 export const Home = () => {
   const { createRoomButtonClicked } = useHomeContainer();
   return (
-    <Col style={{ padding: "2vw" }}>
+    <Col>
       <Row style={{ margin: "1vw 0" }}>
         <Button block onClick={createRoomButtonClicked}>
           Create Room
