@@ -19,6 +19,11 @@ export default class ReducerBuilder {
 
   combine(key, reducer) {
     this.keyToReducer[key] = reducer;
+
+    // need initial state to be an object for combine work.
+    // if you call combine and set initial state to undefined it crashes
+    // Not sure how to handle combine with non object truthy values
+    if (!this.initialState) this.initialState = {};
     return this;
   }
 

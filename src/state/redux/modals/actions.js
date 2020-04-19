@@ -14,3 +14,15 @@ export const modalOk = actionCreatorFactory({
   type: "modalOk",
   creator: ({ modal }) => ({ modal }),
 });
+
+export const modalOpened = actionCreatorFactory({
+  namespace,
+  type: "modalOpened",
+  creator: ({ modal }) => ({ modal }),
+});
+
+export const modalClosed = actionCreatorFactory({
+  namespace,
+  type: "modalClosed",
+  creator: ({ modal }) => ({ modal }),
+});

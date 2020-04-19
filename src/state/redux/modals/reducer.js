@@ -1,6 +1,7 @@
 import ReducerBuilder from "../../redux/utils/factories/ReducerBuilder";
 import React from "react";
-import { createRoomModalReducer } from "./reducers/createRoomModalReducer";
+import { modalCanceled, modalClosed, modalOpened } from "./actions";
+import { setShow } from "./reducers/setShow";
 
 export const MODALS = {
   createRoomModal: "createRoomModal",
@@ -10,6 +11,7 @@ export const MODALS = {
 //TODO make values dynamic
 export const reducer = new ReducerBuilder()
   .setInitialState({})
-  .combine(MODALS.createRoomModal, createRoomModalReducer)
-  .combine(MODALS.updateProfile, createRoomModalReducer)
+  .addReducer(modalOpened.type, setShow(true))
+  .addReducer(modalCanceled.type, setShow(false))
+  .addReducer(modalClosed.type, setShow(false))
   .build();
