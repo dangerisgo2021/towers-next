@@ -1,10 +1,11 @@
 import React from "react";
 import { Table } from "antd";
 import get from "lodash.get";
-import { useQuery } from "@apollo/client";
+import { useQuery, useSubscription } from "@apollo/client";
 import { searchForOpenRooms } from "../../services/queries/searchForOpenRooms";
 import { useDispatch } from "react-redux";
 import { openRoomsTableRowClicked } from "../../state/redux/home/actions";
+import { newRoom as newRoomSubscription } from "../../services/subscriptions/newRoom";
 
 const columns = [
   {
@@ -18,13 +19,21 @@ const columns = [
     key: "mode",
   },
 ];
+
 const useOpenRoomTableContainer = () => {
-  const { data, loading, error } = useQuery(searchForOpenRooms);
+  const { data, loading, error, refetch } = useQuery(searchForOpenRooms);
+  const { data: newRoomSub } = useSubscription(newRoomSubscription);
   const dispatch = useDispatch();
   const openRooms = get(data, "rooms.nodes");
   const onRowClick = ({ record }) => {
     dispatch(openRoomsTableRowClicked({ roomId: record.id }));
   };
+
+  //start subscription on mount
+  React.useEffect(() => {
+    // noinspection JSIgnoredPromiseFromCall
+    refetch();
+  }, [newRoomSub]);
   return {
     openRooms,
     loading,
@@ -41,7 +50,7 @@ export const OpenRoomTable = () => {
       onClick: (event) => {
         console.log({ event });
         onRowClick({ record });
-      }
+      },
     };
   };
   return (
