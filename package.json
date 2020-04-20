@@ -25,7 +25,6 @@
     "lodash.get": "^4.4.2",
     "lodash.words": "^4.2.0",
     "next": "9.3.4",
-    "next-apollo-appsync": "0.0.7",
     "next-redux-wrapper": "^5.0.0",
     "prettier": "^2.0.4",
     "react": "16.13.1",
