@@ -8,6 +8,7 @@ import { fetchProfileOnUserReceived } from "./auth/middleware/fetchProfileOnUser
 import { openCreateRoomModal } from "./createRoomModal/middleware/openCreateRoomModal";
 import { submitCreateRoomForm } from "./createRoomModal/middleware/submitCreateRoomForm";
 import { navigateToRoom } from "./home/middleware/navigateToRoom";
+import { startLocalSession } from "./local/middleware/startLocalSession";
 
 export const middleware = [
   loggerMiddleware,
@@ -20,4 +21,5 @@ export const middleware = [
   openCreateRoomModal,
   submitCreateRoomForm,
   navigateToRoom,
+  startLocalSession,
 ];

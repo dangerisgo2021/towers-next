@@ -5,6 +5,7 @@ import { v1 as uuidv1 } from "uuid";
 import { reducer as siderReducer } from "./sider/reducer";
 import { reducer as navigationReducer } from "./nav/reducer";
 import { reducer as authReducer } from "./auth/reducer";
+import { reducer as localReducer } from "./local/reducer";
 import { reducer as modalsReducer } from "./modals/reducer";
 import { reducer as createRoomModalReducer } from "./createRoomModal/reducer";
 
@@ -16,6 +17,7 @@ const sessionReducer = new ReducerBuilder()
 
 const rootReducerBuilder = new ReducerBuilder()
   .combine("auth", authReducer)
+  .combine("local", localReducer)
   .combine("modals", modalsReducer)
   .combine("nav", navigationReducer)
   .combine("router", routerReducer)
