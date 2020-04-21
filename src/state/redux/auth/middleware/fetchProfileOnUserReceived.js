@@ -1,4 +1,4 @@
-import get from "lodash.get";
+import { get } from "lodash";
 import { userReceived } from "../actions";
 import { apolloClient } from "../../../../services/apollo";
 import { profileQuery } from "../../../../services/queries/profileQuery";

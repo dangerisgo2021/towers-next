@@ -13,8 +13,7 @@ export const useHeaderContainer = () => {
   return {
     isSiderCollapsed,
     isSiderLocked,
-    handleOpenMenuButtonClicked: (e) => {
-      e.preventDefault();
+    handleOpenMenuButtonClicked: () => {
       dispatch(openMenuButtonClicked({ isSiderCollapsed }));
     },
   };

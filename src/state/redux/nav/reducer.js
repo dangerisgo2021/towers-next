@@ -6,10 +6,9 @@ export const reducer = new ReducerBuilder()
   .setInitialState({
     siderNavItems: {
       home: { href: "/", displayText: "Home", id: "home" },
-      lobby: { href: "/lobby", displayText: "Lobby", id: "lobby" },
+      local: { href: "/local", displayText: "Local", id: "local" },
       profile: { href: "/profile", displayText: "Profile", id: "profile" },
       rules: { href: "/rules", displayText: "Rules", id: "rules" },
-      games: { href: "/games", displayText: "My Games", id: "games" },
     },
   })
   .build();

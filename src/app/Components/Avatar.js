@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar as AntAvatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import words from "lodash.words";
+import { words } from "lodash";
 
 import { useAuth0 } from "../Auth/auth0/react-auth0-wrapper";
 import { useDispatch } from "react-redux";

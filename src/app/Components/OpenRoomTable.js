@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "antd";
-import get from "lodash.get";
+import { get } from "lodash";
 import { useQuery, useSubscription } from "@apollo/client";
 import { searchForOpenRooms } from "../../services/queries/searchForOpenRooms";
 import { useDispatch } from "react-redux";
