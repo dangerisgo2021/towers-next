@@ -2,9 +2,89 @@ import React from "react";
 import classnames from "classnames";
 import { startCase } from "lodash";
 import { Button, Row } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { reset, redo, undo, move } from "../../../state/redux/match/actions";
 
-export const TowersBoard = (props) => {
-  console.log({ props });
+const useTowersContainer = ({ matchSelector }) => {
+  const dispatch = useDispatch();
+  const match = useSelector(matchSelector);
+  const {
+    id = "MATCH_ID_MISSING",
+    board: { cells = [], width = 7, height = 7 } = {},
+    maxTowerSize,
+    currentPlayerIndex = "0",
+  } = match || {};
+
+  return {
+    G: {
+      board: { cells, width, height },
+      maxTowerSize,
+    },
+    ctx: { currentPlayer: currentPlayerIndex },
+    moves: {
+      build: (currentPlayer, selectedCell) => {
+        dispatch(
+          move({ matchId: id, name: "build", currentPlayer, selectedCell })
+        );
+      },
+      pushUp: (currentPlayer, selectedCell) => {
+        dispatch(
+          move({
+            matchId: id,
+            name: "push",
+            direction: "up",
+            currentPlayer,
+            selectedCell,
+          })
+        );
+      },
+      pushLeft: (currentPlayer, selectedCell) => {
+        dispatch(
+          move({
+            matchId: id,
+            name: "push",
+            direction: "left",
+            currentPlayer,
+            selectedCell,
+          })
+        );
+      },
+      pushRight: (currentPlayer, selectedCell) => {
+        dispatch(
+          move({
+            matchId: id,
+            name: "push",
+            direction: "right",
+            currentPlayer,
+            selectedCell,
+          })
+        );
+      },
+      pushDown: (currentPlayer, selectedCell) => {
+        dispatch(
+          move({
+            matchId: id,
+            name: "push",
+            direction: "down",
+            currentPlayer,
+            selectedCell,
+          })
+        );
+      },
+    },
+    reset: () => {
+      dispatch(reset({ matchId: id }));
+    },
+    undo: () => {
+      dispatch(undo({ matchId: id }));
+    },
+    redo: () => {
+      dispatch(redo({ matchId: id }));
+    },
+  };
+};
+
+export const Towers = ({ matchSelector }) => {
   const {
     G: {
       board: { cells, width, height },
@@ -12,18 +92,17 @@ export const TowersBoard = (props) => {
     },
     ctx: { currentPlayer },
     moves,
-    playerID,
-    isConnected,
     reset,
     undo,
     redo,
-  } = props;
+  } = useTowersContainer({ matchSelector });
   const [selectedCell, setSelectedCell] = React.useState(cells[0]);
+
   const cellWidth = "50px";
-  const actions = Object.entries(moves).map(([key, value]) => ({
-    id: key,
-    move: value,
-    text: startCase(key),
+  const actions = Object.entries(moves).map(([id, move]) => ({
+    id,
+    move,
+    text: startCase(id),
   }));
 
   const selectedController = selectedCell.towerPieces.find((piece, i, array) =>
@@ -41,7 +120,6 @@ export const TowersBoard = (props) => {
       id: "UNDO",
       text: "UNDO",
       onClick: () => {
-        console.log({ undo });
         undo();
       },
     },
@@ -83,15 +161,12 @@ export const TowersBoard = (props) => {
       </div>
       <div className="controls">
         <div className="info">
-          <span className="info-bit">
-            Player: {playerID} - {isConnected ? "connected" : "disconnected"}
-          </span>
-          <span className="info-bit">Current Player : {currentPlayer}</span>
+          <span className="info-bit">Who's turn? : {currentPlayer}</span>
           <span className="info-bit">
             Selected: [{`${selectedCell.x}, ${selectedCell.y}`}]
           </span>
           <span className="info-bit">
-            Selected Controller : {selectedController.type}
+            Selected Tower's Controller : {selectedController.type}
           </span>
           <span className="info-bit">
             Is Castle : {selectedCell.isCastle ? "yes" : "no"}
@@ -155,6 +230,8 @@ export const TowersBoard = (props) => {
           grid-template-columns: repeat(${width}, ${cellWidth});
           grid-template-rows: repeat(${height}, ${cellWidth});
           justify-content: center;
+          background-color: dimgray;
+          padding: 1vw;
         }
 
         .piece {

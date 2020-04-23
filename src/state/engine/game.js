@@ -2,9 +2,17 @@ import { cloneDeep } from "lodash";
 import { getCellByIndex, setup } from "./Towers/setup";
 import { INVALID_MOVE } from "boardgame.io/core";
 
-const isVictory = ({ G }) => {
-  const { castles } = G.gameConfig;
-  const { cells } = G.board;
+const calculateVictoryProgress = (input) => {
+  console.log(0, "input", input);
+  const { board, gameConfig } = input;
+  console.log(1, "{ board, gameConfig }", { board, gameConfig });
+
+  const { castles } = gameConfig;
+  console.log(2, "castles", castles);
+
+  const { cells } = board;
+  console.log(3, "cells", cells);
+
   const playerToScoreMap = castles.reduce((acc, val) => {
     const { x, y } = val;
     const castleCell = getCellByIndex({ cells, x, y });
@@ -20,7 +28,7 @@ const isVictory = ({ G }) => {
 
       acc[controller].castlesControlled = acc[controller].castlesControlled + 1;
 
-      if (castleCell.size === G.gameConfig.maxTowerSize)
+      if (castleCell.size === gameConfig.maxTowerSize)
         acc[controller] = {
           ...acc[controller],
           castlesCrowned: acc[controller].castlesCrowned + 1,
@@ -29,17 +37,23 @@ const isVictory = ({ G }) => {
 
     return acc;
   }, {});
-  return Object.values(playerToScoreMap).find(
-    ({ castlesControlled, castlesCrowned }) => {
-      return (
-        castlesControlled >= G.gameConfig.castlesToWin ||
-        castlesCrowned >= G.gameConfig.crownsToWin
-      );
-    }
-  );
+  console.log(4, "playerToScoreMap", playerToScoreMap);
+
+  // winner is the key of the first winning entry.
+  const [winner = null] =
+    Object.entries(playerToScoreMap).find(
+      ([_, { castlesControlled, castlesCrowned }]) =>
+        castlesControlled >= gameConfig.castlesToWin ||
+        castlesCrowned >= gameConfig.crownsToWin
+    ) || [];
+
+  return {
+    ...playerToScoreMap,
+    winner,
+  };
 };
-const push = ({ G, x, y, xDir, yDir }) => {
-  const cells = G.board.cells;
+const push = ({ board, x, y, xDir, yDir }) => {
+  const { cells } = board;
   const pushedCell = getCellByIndex({ cells, x, y });
   const movingPieces = cloneDeep(pushedCell.towerPieces);
   let currentCell = pushedCell;
@@ -83,8 +97,8 @@ export const Towers = {
     moveLimit: 1,
   },
   moves: {
-    build: (G, ctx, player, { x, y }) => {
-      const cell = getCellByIndex({ cells: G.board.cells, x, y });
+    build: (board, player, { x, y }) => {
+      const cell = getCellByIndex({ cells: board.cells, x, y });
 
       cell.towerPieces[cell.size] = {
         ...cell.towerPieces[cell.size],
@@ -93,16 +107,15 @@ export const Towers = {
 
       cell.size++;
     },
-    pushUp: (G, ctx, player, { x, y }) => push({ G, x, y, xDir: 0, yDir: -1 }),
-    pushLeft: (G, ctx, player, { x, y }) =>
-      push({ G, x, y, xDir: -1, yDir: 0 }),
-    pushRight: (G, ctx, player, { x, y }) =>
-      push({ G, x, y, xDir: 1, yDir: 0 }),
-    pushDown: (G, ctx, player, { x, y }) => push({ G, x, y, xDir: 0, yDir: 1 }),
+    pushUp: (board, player, { x, y }) =>
+      push({ board, x, y, xDir: 0, yDir: -1 }),
+    pushLeft: (board, player, { x, y }) =>
+      push({ board, x, y, xDir: -1, yDir: 0 }),
+    pushRight: (board, player, { x, y }) =>
+      push({ board, x, y, xDir: 1, yDir: 0 }),
+    pushDown: (board, player, { x, y }) =>
+      push({ board, x, y, xDir: 0, yDir: 1 }),
   },
-  endIf: (G, ctx) => {
-    if (isVictory({ G })) {
-      return { winner: ctx.currentPlayer };
-    }
-  },
+  victoryProgress: ({ board, gameConfig }) => calculateVictoryProgress({ board, gameConfig })
+
 };

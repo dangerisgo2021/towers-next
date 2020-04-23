@@ -9,8 +9,8 @@ if (isServer) {
 }
 
 export let apolloClient = null;
-//const GRAPHQL_URI = "http://localhost:5000/graphql"; // dev
-const GRAPHQL_URI = "https://towers-graphql-server.herokuapp.com/graphql"; // prod
+const GRAPHQL_URI = "http://localhost:5000/graphql"; // dev
+//const GRAPHQL_URI = "https://towers-graphql-server.herokuapp.com/graphql"; // prod
 
 export const initApollo = (initialState) => {
   // Make sure to create a new client for every server-side request so that data

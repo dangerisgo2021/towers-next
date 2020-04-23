@@ -2,10 +2,14 @@ import ReducerBuilder from "../utils/factories/ReducerBuilder";
 import React from "react";
 import { localSessionStarted } from "./actions";
 import { localSessionStarted as localSessionStartedReducer } from "./reducers/localSessionStarted";
+import { matchReducer } from "../match/reducer";
 
 export const reducer = new ReducerBuilder()
   .setInitialState({
-    started: false,
+    started: true,
+    roomId: null,
+    matchId: null,
   })
   .addReducer(localSessionStarted.type, localSessionStartedReducer)
+  .combine("match", matchReducer({ matchId: "LOCAL" }))
   .build();

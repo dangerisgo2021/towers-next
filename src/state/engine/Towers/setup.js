@@ -87,6 +87,9 @@ exports.setup = () => {
   return {
     gameConfig,
     maxTowerSize,
+    moves: [],
+    players: [{ name: "1st Player" }, { name: "2nd Player" }],
+    currentPlayerIndex: 0,
     board: {
       cells,
       width,
