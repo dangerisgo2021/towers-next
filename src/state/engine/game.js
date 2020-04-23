@@ -1,6 +1,5 @@
 import { cloneDeep } from "lodash";
 import { getCellByIndex, setup } from "./Towers/setup";
-import { INVALID_MOVE } from "boardgame.io/core";
 
 const calculateVictoryProgress = (input) => {
   console.log(0, "input", input);
