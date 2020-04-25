@@ -1,4 +1,4 @@
-import { routerReducer } from "connected-next-router";
+//import { routerReducer } from "connected-next-router";
 
 import ReducerBuilder from "./utils/factories/ReducerBuilder";
 import { v1 as uuidv1 } from "uuid";
@@ -20,7 +20,7 @@ const rootReducerBuilder = new ReducerBuilder()
   .combine("local", localReducer)
   .combine("modals", modalsReducer)
   .combine("nav", navigationReducer)
-  .combine("router", routerReducer)
+  //  .combine("router", routerReducer)
   .combine("session", sessionReducer)
   .combine("sider", siderReducer)
   .combine("createRoomModal", createRoomModalReducer);

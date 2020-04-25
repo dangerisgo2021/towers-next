@@ -1,16 +1,9 @@
 import { cloneDeep } from "lodash";
 import { getCellByIndex, setup } from "./Towers/setup";
 
-const calculateVictoryProgress = (input) => {
-  console.log(0, "input", input);
-  const { board, gameConfig } = input;
-  console.log(1, "{ board, gameConfig }", { board, gameConfig });
-
+const calculateVictoryProgress = ({ board, gameConfig }) => {
   const { castles } = gameConfig;
-  console.log(2, "castles", castles);
-
   const { cells } = board;
-  console.log(3, "cells", cells);
 
   const playerToScoreMap = castles.reduce((acc, val) => {
     const { x, y } = val;
@@ -24,19 +17,15 @@ const calculateVictoryProgress = (input) => {
           castlesCrowned: 0,
         };
       }
-
       acc[controller].castlesControlled = acc[controller].castlesControlled + 1;
-
       if (castleCell.size === gameConfig.maxTowerSize)
         acc[controller] = {
           ...acc[controller],
           castlesCrowned: acc[controller].castlesCrowned + 1,
         };
     }
-
     return acc;
   }, {});
-  console.log(4, "playerToScoreMap", playerToScoreMap);
 
   // winner is the key of the first winning entry.
   const [winner = null] =
@@ -51,6 +40,7 @@ const calculateVictoryProgress = (input) => {
     winner,
   };
 };
+
 const push = ({ board, x, y, xDir, yDir }) => {
   const { cells } = board;
   const pushedCell = getCellByIndex({ cells, x, y });
@@ -83,10 +73,6 @@ const push = ({ board, x, y, xDir, yDir }) => {
       }
     }
   });
-
-  if (currentCell.id === pushedCell.id) {
-    return INVALID_MOVE;
-  }
 };
 
 export const Towers = {
@@ -115,6 +101,6 @@ export const Towers = {
     pushDown: (board, player, { x, y }) =>
       push({ board, x, y, xDir: 0, yDir: 1 }),
   },
-  victoryProgress: ({ board, gameConfig }) => calculateVictoryProgress({ board, gameConfig })
-
+  victoryProgress: ({ board, gameConfig }) =>
+    calculateVictoryProgress({ board, gameConfig }),
 };

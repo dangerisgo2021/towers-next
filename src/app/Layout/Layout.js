@@ -8,7 +8,7 @@ import { SiderMenu } from "./Sider/SiderMenu";
 import { Modals } from "./Modals";
 
 export const AppLayout = ({ children }) => (
-  <Layout>
+  <Layout hasSider={true}>
     <Sider>
       <SiderMenu />
     </Sider>

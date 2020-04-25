@@ -1,7 +1,6 @@
 import React from "react";
 import App from "next/app";
 import { Provider } from "react-redux";
-import { ConnectedRouter } from "connected-next-router";
 import withRedux from "next-redux-wrapper";
 import { compose } from "redux";
 import { ApolloProvider } from "@apollo/client";
@@ -18,13 +17,11 @@ function MyApp({ Component, pageProps, store, apolloClient }) {
   return (
     <Provider store={store}>
       <Auth0Provider {...auth0Config}>
-        <ConnectedRouter>
-          <ApolloProvider client={apolloClient}>
-            <AppLayout>
-              <Component {...pageProps} />
-            </AppLayout>
-          </ApolloProvider>
-        </ConnectedRouter>
+        <ApolloProvider client={apolloClient}>
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
+        </ApolloProvider>
       </Auth0Provider>
     </Provider>
   );
