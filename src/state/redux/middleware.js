@@ -9,6 +9,7 @@ import { submitCreateRoomForm } from "./createRoomModal/middleware/submitCreateR
 import { navigateToRoom } from "./home/middleware/navigateToRoom";
 import { notificationOnFailedMove } from "./local/middleware/notificationOnFailedMove";
 import { addPlayerToRoom } from "./room/middleware/addPlayerToRoom";
+//import { startMatchInRoom } from "./room/middleware/startMatchInRoom";
 
 export const middleware = [
   loggerMiddleware,

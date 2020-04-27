@@ -1,20 +1,19 @@
-import { joinRoomClicked } from "../actions";
+import { startButtonClicked } from "../actions";
 import { apolloClient } from "../../../../services/apollo";
-import { addPlayerToRoom as addPlayerToRoomMutation } from "../../../../services/mutations/addPlayerToRoom";
+import { startMatchInRoom as startMatchInRoomMutation } from "../../../../services/mutations/startMatchInRoom";
 import { getProfileId } from "../../auth/selectors/getProfileId";
 
-export const addPlayerToRoom = (store) => (next) => (action) => {
+export const startMatchInRoom = (store) => (next) => (action) => {
   next(action);
 
-  if (action.type === joinRoomClicked.type) {
+  if (action.type === startButtonClicked.type) {
     const state = store.getState();
     const profileId = getProfileId(state);
     if (profileId && action.payload.roomId) {
       apolloClient.mutate({
-        mutation: addPlayerToRoomMutation,
+        mutation: startMatchInRoomMutation,
         variables: {
           roomId: action.payload.roomId,
-          profileId,
         },
         refetchQueries: ["roomPageQuery"],
       });

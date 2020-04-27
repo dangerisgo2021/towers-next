@@ -13,3 +13,9 @@ export const playerClicked = actionCreatorFactory({
   type: "playerClicked",
   creator: ({ playerIndex, roomId }) => ({ playerIndex, roomId }),
 });
+
+export const joinRoomClicked = actionCreatorFactory({
+  namespace,
+  type: "joinRoomClicked",
+  creator: ({ roomId }) => ({ roomId }),
+});
