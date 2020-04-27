@@ -1,5 +1,5 @@
 import React from "react";
 
-import { Home } from "../src/app/Layout/Pages/Home";
+import { Home } from "../src/app/Pages/Home";
 
 export default Home;

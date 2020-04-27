@@ -7,3 +7,9 @@ export const userReceived = actionCreatorFactory({
   type: "userReceived",
   creator: ({ user }) => ({ user }),
 });
+
+export const profileReceived = actionCreatorFactory({
+  namespace,
+  type: "profileReceived",
+  creator: ({ profile }) => profile,
+});

@@ -1,9 +1,9 @@
 import { get } from "lodash";
-import { userReceived } from "../actions";
+import {profileReceived, userReceived} from "../actions";
 import { apolloClient } from "../../../../services/apollo";
 import { profileQuery } from "../../../../services/queries/profileQuery";
 
-export const fetchProfileOnUserReceived = () => (next) => async (action) => {
+export const fetchProfileOnUserReceived = (store) => (next) => async (action) => {
   next(action);
 
   if (action.type === userReceived.type) {
@@ -12,6 +12,7 @@ export const fetchProfileOnUserReceived = () => (next) => async (action) => {
       query: profileQuery,
       variables: { agentId },
     });
-    console.log(data);
+    
+    store.dispatch(profileReceived(data))
   }
 };

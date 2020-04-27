@@ -8,6 +8,7 @@ import { openCreateRoomModal } from "./createRoomModal/middleware/openCreateRoom
 import { submitCreateRoomForm } from "./createRoomModal/middleware/submitCreateRoomForm";
 import { navigateToRoom } from "./home/middleware/navigateToRoom";
 import { notificationOnFailedMove } from "./local/middleware/notificationOnFailedMove";
+import { addPlayerToRoom } from "./room/middleware/addPlayerToRoom";
 
 export const middleware = [
   loggerMiddleware,
@@ -20,4 +21,5 @@ export const middleware = [
   submitCreateRoomForm,
   navigateToRoom,
   notificationOnFailedMove,
+  addPlayerToRoom,
 ];

@@ -9,9 +9,7 @@ const SiderMenuRender = ({ navItems = [] }) => (
     {navItems.map(({ id, href, displayText }) => (
       <Menu.Item key={id}>
         <Link href={href}>
-          <a>
-            <span className="nav-text">{displayText}</span>
-          </a>
+          <span className="nav-text">{displayText}</span>
         </Link>
       </Menu.Item>
     ))}

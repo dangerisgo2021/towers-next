@@ -1,5 +1,4 @@
 import ReducerBuilder from "../utils/factories/ReducerBuilder";
-import React from "react";
 
 //TODO make values dynamic
 export const reducer = new ReducerBuilder()

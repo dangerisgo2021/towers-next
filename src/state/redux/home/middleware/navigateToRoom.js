@@ -5,6 +5,6 @@ export const navigateToRoom = () => (next) => (action) => {
   next(action);
 
   if (action.type === openRoomsTableRowClicked.type) {
-    Router.push(`/room/${action.payload.roomId}`);
+    Router.push(`/room/[roomId]`, `/room/${action.payload.roomId}`);
   }
 };

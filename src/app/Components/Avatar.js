@@ -7,7 +7,7 @@ import { useAuth0 } from "../Auth/auth0/react-auth0-wrapper";
 import { useDispatch } from "react-redux";
 import { userReceived } from "../../state/redux/auth/actions";
 
-const AvatarRender = ({ user, loginWithRedirect, logout, name, loading }) => {
+const AvatarRender = ({ user, login, logout, name, loading }) => {
   return user ? (
     <AntAvatar size="large" onClick={() => !loading && logout()}>
       {name}
@@ -15,14 +15,14 @@ const AvatarRender = ({ user, loginWithRedirect, logout, name, loading }) => {
   ) : (
     <AntAvatar
       size="large"
-      icon={<UserOutlined onClick={() => !loading && loginWithRedirect({})} />}
+      icon={<UserOutlined onClick={() => !loading && login({})} />}
     />
   );
 };
 
 export const Avatar = () => {
   const dispatch = useDispatch();
-  const { loading, user, loginWithRedirect, logout } = useAuth0();
+  const { loading, user, loginWithPopup, logout } = useAuth0();
   React.useEffect(() => {
     if (user) {
       dispatch(userReceived({ user }));
@@ -35,7 +35,7 @@ export const Avatar = () => {
       name={name}
       loading={loading}
       user={user}
-      loginWithRedirect={loginWithRedirect}
+      login={loginWithPopup}
       logout={logout}
     />
   );
