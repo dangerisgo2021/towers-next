@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import {  Col, Divider, Skeleton } from "antd";
+import { Col, Divider, Skeleton } from "antd";
 import { get } from "lodash";
 import { useRouter } from "next/router";
 import { Error } from "../Components/Error";
@@ -35,7 +35,6 @@ const useRoomContainer = () => {
     error,
     room,
     isAuthenticated,
-
   };
 };
 
@@ -55,9 +54,7 @@ export const Room = () => {
       <Divider />
       {!isAuthenticated && <LoginToJoin />}
       <Divider />
-      {!started && (
-        <StartGame players={players} gameConfig={{ TODO: "Get_from_DB" }} />
-      )}
+      {!started && <StartGame players={players} />}
       {/*TODO started && <Match />*/}
     </Col>
   );
