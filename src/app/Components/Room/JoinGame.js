@@ -22,7 +22,7 @@ const useJoinGameContainer = ({ gameConfig, players }) => {
   const dispatch = useDispatch();
   const roomId = useGetRoomIdFromUrl();
   const { id } = useSelector(getProfile) || defaultProfile;
-  const joined = players.find((player) => get(player, "profile.id") === id);
+  const joined = players && players.find((player) => get(player, "profile.id") === id);
   const currentPlayerCount = Array.isArray(players) ? players.length : 0;
   const { minPlayers, maxPlayers } = gameConfig;
   const percent = (currentPlayerCount / minPlayers) * 100;
@@ -41,6 +41,7 @@ const useJoinGameContainer = ({ gameConfig, players }) => {
     },
   };
 };
+
 export const JoinGame = ({ gameConfig = defaultGameConfig, players }) => {
   const {
     joinRoomClicked,

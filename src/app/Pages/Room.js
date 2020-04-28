@@ -45,6 +45,8 @@ export const Room = () => {
 
   if (error) return <Error error={JSON.stringify(error)} />;
 
+  if (!room) return <Error error="No Room Found" />;
+
   const { started, players } = room;
 
   return (
