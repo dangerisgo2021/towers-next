@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useSubscription } from "@apollo/client";
 import { Col, Divider, Skeleton } from "antd";
 import { get } from "lodash";
 import { useRouter } from "next/router";
@@ -10,16 +10,29 @@ import { roomPageQuery } from "../../services/queries/roomPageQuery";
 import { LoginToJoin } from "../Components/Room/LoginToJoin";
 import { StartGame } from "../Components/Room/StartGame";
 import { JoinGame } from "../Components/Room/JoinGame";
+import { updatedRoom } from "../../services/subscriptions/updatedRoom";
 
 const defaultRoom = {};
 const useRoomPageQuery = () => {
   const { query = {} } = useRouter();
   const { roomId } = query;
-  const { data, loading, error } = useQuery(roomPageQuery, {
+  const { data, loading, error, refetch } = useQuery(roomPageQuery, {
     variables: { roomId },
     skip: !roomId,
   });
   const room = get(data, "room", defaultRoom);
+  const { data: updatedRoomSubscription } = useSubscription(updatedRoom, {
+    variables: { roomId },
+  });
+  
+  // refetch when subscription data changes
+  // which means the room we are watching updated
+  // start subscription on mount
+  React.useEffect(() => {
+    // noinspection JSIgnoredPromiseFromCall
+    refetch();
+  }, [updatedRoomSubscription]);
+
   return {
     room,
     loading,
