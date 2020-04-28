@@ -1,7 +1,10 @@
 import React from "react";
 import { Button, Row, Progress } from "antd";
 import { get } from "lodash";
-import { joinRoomClicked } from "../../../state/redux/room/actions";
+import {
+  joinRoomClicked,
+  leaveRoomClicked,
+} from "../../../state/redux/room/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../../state/redux/auth/selectors/getProfile";
 import { useRouter } from "next/router";
@@ -33,11 +36,15 @@ const useJoinGameContainer = ({ gameConfig, players }) => {
     joinRoomClicked: () => {
       dispatch(joinRoomClicked({ roomId }));
     },
+    leaveRoomClicked: () => {
+      dispatch(leaveRoomClicked({ roomId }));
+    },
   };
 };
 export const JoinGame = ({ gameConfig = defaultGameConfig, players }) => {
   const {
     joinRoomClicked,
+    leaveRoomClicked,
     percent,
     isJoinDisabled,
     isLeaveDisabled,
@@ -65,7 +72,7 @@ export const JoinGame = ({ gameConfig = defaultGameConfig, players }) => {
       <Button
         disabled={isLeaveDisabled}
         onClick={() => {
-          joinRoomClicked();
+          leaveRoomClicked();
         }}
       >
         Leave Game

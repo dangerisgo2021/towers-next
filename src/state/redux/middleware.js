@@ -9,6 +9,7 @@ import { submitCreateRoomForm } from "./createRoomModal/middleware/submitCreateR
 import { navigateToRoom } from "./home/middleware/navigateToRoom";
 import { notificationOnFailedMove } from "./local/middleware/notificationOnFailedMove";
 import { addPlayerToRoom } from "./room/middleware/addPlayerToRoom";
+import { removePlayerFromRoom } from "./room/middleware/removePlayerFromRoom";
 //import { startMatchInRoom } from "./room/middleware/startMatchInRoom";
 
 export const middleware = [
@@ -23,4 +24,5 @@ export const middleware = [
   navigateToRoom,
   notificationOnFailedMove,
   addPlayerToRoom,
+  removePlayerFromRoom,
 ];

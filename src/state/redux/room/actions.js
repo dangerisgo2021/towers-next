@@ -8,14 +8,14 @@ export const startButtonClicked = actionCreatorFactory({
   type: "startButtonClicked",
 });
 
-export const playerClicked = actionCreatorFactory({
-  namespace,
-  type: "playerClicked",
-  creator: ({ playerIndex, roomId }) => ({ playerIndex, roomId }),
-});
-
 export const joinRoomClicked = actionCreatorFactory({
   namespace,
   type: "joinRoomClicked",
+  creator: ({ roomId }) => ({ roomId }),
+});
+
+export const leaveRoomClicked = actionCreatorFactory({
+  namespace,
+  type: "leaveRoomClicked",
   creator: ({ roomId }) => ({ roomId }),
 });
