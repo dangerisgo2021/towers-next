@@ -2,7 +2,7 @@ import ReducerBuilder from "../utils/factories/ReducerBuilder";
 import React from "react";
 import { localSessionStarted } from "./actions";
 import { localSessionStarted as localSessionStartedReducer } from "./reducers/localSessionStarted";
-import { matchReducer } from "../match/reducer";
+import { reducer as matchReducer } from "../match/reducer";
 
 export const reducer = new ReducerBuilder()
   .setInitialState({

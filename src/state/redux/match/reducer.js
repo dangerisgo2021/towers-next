@@ -6,7 +6,7 @@ import { applyMove } from "./reducers/applyMove";
 
 const defaultInitialState = setup();
 
-export const matchReducer = ({ initialValue = defaultInitialState, matchId }) =>
+export const reducer = ({ initialValue = defaultInitialState, matchId }) =>
   new ReducerBuilder()
     .setInitialState({...initialValue, id: matchId})
     .addReducer(move.type, applyMove)

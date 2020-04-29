@@ -6,6 +6,7 @@ const namespace = "room";
 export const startButtonClicked = actionCreatorFactory({
   namespace,
   type: "startButtonClicked",
+  creator: ({ roomId }) => ({ roomId }),
 });
 
 export const joinRoomClicked = actionCreatorFactory({

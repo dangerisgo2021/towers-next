@@ -2,7 +2,6 @@ import React from "react";
 import { useQuery, useSubscription } from "@apollo/client";
 import { Col, Divider, Skeleton } from "antd";
 import { get } from "lodash";
-import { useRouter } from "next/router";
 import { Error } from "../Components/Error";
 
 import { useAuth0 } from "../Auth/auth0/react-auth0-wrapper";
@@ -11,11 +10,12 @@ import { LoginToJoin } from "../Components/Room/LoginToJoin";
 import { StartGame } from "../Components/Room/StartGame";
 import { JoinGame } from "../Components/Room/JoinGame";
 import { updatedRoom } from "../../services/subscriptions/updatedRoom";
+import { useGetRoomIdFromUrl } from "../Components/Room/hooks/useGetRoomIdFromUrl";
+import { RemoteTowers } from "../Components/Room/RemoteTowers";
 
 const defaultRoom = {};
 const useRoomPageQuery = () => {
-  const { query = {} } = useRouter();
-  const { roomId } = query;
+  const roomId = useGetRoomIdFromUrl();
   const { data, loading, error, refetch } = useQuery(roomPageQuery, {
     variables: { roomId },
     skip: !roomId,
@@ -24,13 +24,15 @@ const useRoomPageQuery = () => {
   const { data: updatedRoomSubscription } = useSubscription(updatedRoom, {
     variables: { roomId },
   });
-  
+
   // refetch when subscription data changes
   // which means the room we are watching updated
   // start subscription on mount
   React.useEffect(() => {
     // noinspection JSIgnoredPromiseFromCall
-    refetch();
+    if (updatedRoomSubscription) {
+      refetch().catch(console.error);
+    }
   }, [updatedRoomSubscription]);
 
   return {
@@ -39,20 +41,31 @@ const useRoomPageQuery = () => {
     error,
   };
 };
+
 const useRoomContainer = () => {
   const { isAuthenticated } = useAuth0();
   const { room, loading, error } = useRoomPageQuery();
+  const roomMatchSelector = () => {
 
+    return room ? room.match : undefined;
+  };
   return {
     loading,
     error,
     room,
     isAuthenticated,
+    roomMatchSelector,
   };
 };
 
 export const Room = () => {
-  const { room, loading, error, isAuthenticated } = useRoomContainer();
+  const {
+    room,
+    loading,
+    error,
+    isAuthenticated,
+    roomMatchSelector,
+  } = useRoomContainer();
 
   if (loading) return <Skeleton />;
 
@@ -64,13 +77,18 @@ export const Room = () => {
 
   return (
     <Col className="Room">
-      <Divider />
-      {isAuthenticated && <JoinGame players={players} />}
-      <Divider />
-      {!isAuthenticated && <LoginToJoin />}
-      <Divider />
-      {!started && <StartGame players={players} />}
-      {/*TODO started && <Match />*/}
+      {started ? (
+        <RemoteTowers matchSelector={roomMatchSelector} />
+      ) : (
+        <>
+          <Divider />
+          {isAuthenticated && <JoinGame players={players} />}
+          <Divider />
+          {!isAuthenticated && <LoginToJoin />}
+          <Divider />
+          <StartGame players={players} />
+        </>
+      )}
     </Col>
   );
 };

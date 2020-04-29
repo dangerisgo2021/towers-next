@@ -7,22 +7,17 @@ import {
 } from "../../../state/redux/room/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../../state/redux/auth/selectors/getProfile";
-import { useRouter } from "next/router";
+import { useGetRoomIdFromUrl } from "./hooks/useGetRoomIdFromUrl";
 
 const defaultGameConfig = { minPlayers: 2 };
 const defaultProfile = { name: "Anon ?????" };
-
-const useGetRoomIdFromUrl = () => {
-  const { query = {} } = useRouter();
-  const { roomId } = query;
-  return roomId;
-};
 
 const useJoinGameContainer = ({ gameConfig, players }) => {
   const dispatch = useDispatch();
   const roomId = useGetRoomIdFromUrl();
   const { id } = useSelector(getProfile) || defaultProfile;
-  const joined = players && players.find((player) => get(player, "profile.id") === id);
+  const joined =
+    players && players.find((player) => get(player, "profile.id") === id);
   const currentPlayerCount = Array.isArray(players) ? players.length : 0;
   const { minPlayers, maxPlayers } = gameConfig;
   const percent = (currentPlayerCount / minPlayers) * 100;

@@ -5,7 +5,6 @@ import { reducer as authReducer } from "./auth/reducer";
 import { reducer as localReducer } from "./local/reducer";
 import { reducer as modalsReducer } from "./modals/reducer";
 import { reducer as createRoomModalReducer } from "./createRoomModal/reducer";
-import { reducer as roomReducer } from "./room/reducer";
 import { reducer as sessionReducer } from "./session/reducer";
 
 const rootReducerBuilder = new ReducerBuilder()
@@ -14,7 +13,6 @@ const rootReducerBuilder = new ReducerBuilder()
   .combine("local", localReducer)
   .combine("modals", modalsReducer)
   .combine("nav", navigationReducer)
-  .combine("rooms", roomReducer)
   .combine("session", sessionReducer)
   .combine("sider", siderReducer);
 

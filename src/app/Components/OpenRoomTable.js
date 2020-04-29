@@ -32,7 +32,9 @@ const useOpenRoomTableContainer = () => {
   //start subscription on mount
   React.useEffect(() => {
     // noinspection JSIgnoredPromiseFromCall
-    refetch();
+    if (newRoomSub) {
+      refetch().catch(console.error);
+    }
   }, [newRoomSub]);
   return {
     openRooms,
