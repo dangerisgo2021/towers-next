@@ -15,6 +15,7 @@ export const roomPageQuery = gql`
           width
           height
           cells {
+            id
             location {
               x
               y
@@ -24,6 +25,7 @@ export const roomPageQuery = gql`
             towerPieces {
               type
               owner
+              id
             }
           }
         }
