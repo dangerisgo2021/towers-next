@@ -40,3 +40,11 @@ export const roomMatchMoveClicked = actionCreatorFactory({
     roomId,
   }),
 });
+
+export const roomResetClicked = actionCreatorFactory({
+  namespace,
+  type: "roomResetClicked",
+  creator: ({ roomId }) => ({
+    roomId,
+  }),
+});

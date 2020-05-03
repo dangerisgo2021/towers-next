@@ -2,8 +2,12 @@ import React from "react";
 import classnames from "classnames";
 import { isEqual, isNil } from "lodash";
 import { useDispatch } from "react-redux";
-import { roomMatchMoveClicked } from "../../../state/redux/room/actions";
+import {
+  roomMatchMoveClicked,
+  roomResetClicked,
+} from "../../../state/redux/room/actions";
 import { useGetRoomIdFromUrl } from "./hooks/useGetRoomIdFromUrl";
+import { Button } from "antd";
 
 const useTowersContainer = ({ match, moveNames }) => {
   const roomId = useGetRoomIdFromUrl();
@@ -44,6 +48,9 @@ const useTowersContainer = ({ match, moveNames }) => {
     maxTowerSize,
     currentPlayer: currentPlayerIndex,
     moves,
+    onResetClicked: () => {
+      dispatch(roomResetClicked({ roomId }));
+    },
   };
 };
 
@@ -55,6 +62,7 @@ export const RemoteTowers = ({ match, moveNames }) => {
     moves,
     selectedCell,
     setSelectedCell,
+    onResetClicked,
   } = useTowersContainer({ match, moveNames });
   const cellWidth = "50px";
 
@@ -112,7 +120,7 @@ export const RemoteTowers = ({ match, moveNames }) => {
         <div className="actions">
           {moves.map((move) => {
             return (
-              <div
+              <Button
                 key={move.id}
                 className="action"
                 onClick={(e) => {
@@ -137,10 +145,18 @@ export const RemoteTowers = ({ match, moveNames }) => {
                 }}
               >
                 {move.text}
-              </div>
+              </Button>
             );
           })}
         </div>
+        <Button
+          className="reset"
+          onClick={() => {
+            onResetClicked();
+          }}
+        >
+          RESET
+        </Button>
       </div>
 
       <style jsx>{`
@@ -196,10 +212,11 @@ export const RemoteTowers = ({ match, moveNames }) => {
           border: 2px solid black;
           background-color: green;
           text-align: center;
+          padding: 0;
         }
         .actions {
           display: grid;
-          grid-auto-flow: column;
+          grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
         }
 
         .info {

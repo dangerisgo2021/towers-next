@@ -12,6 +12,7 @@ import { addPlayerToRoom } from "./room/middleware/addPlayerToRoom";
 import { removePlayerFromRoom } from "./room/middleware/removePlayerFromRoom";
 import { startMatchInRoom } from "./room/middleware/startMatchInRoom";
 import { applyMoveToMatch } from "./room/middleware/applyMoveToMatch";
+import { resetRoomMatch } from "./room/middleware/resetRoomMatch";
 
 export const middleware = [
   loggerMiddleware,
@@ -28,4 +29,5 @@ export const middleware = [
   removePlayerFromRoom,
   startMatchInRoom,
   applyMoveToMatch,
+  resetRoomMatch,
 ];
