@@ -20,3 +20,23 @@ export const leaveRoomClicked = actionCreatorFactory({
   type: "leaveRoomClicked",
   creator: ({ roomId }) => ({ roomId }),
 });
+
+export const roomMatchMoveClicked = actionCreatorFactory({
+  namespace,
+  type: "roomMatchMoveClicked",
+  creator: ({
+    matchId,
+    name,
+    direction,
+    currentPlayer,
+    selectedCell,
+    roomId,
+  }) => ({
+    matchId,
+    name,
+    direction,
+    currentPlayer,
+    selectedCell,
+    roomId,
+  }),
+});

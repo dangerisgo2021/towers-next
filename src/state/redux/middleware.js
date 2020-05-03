@@ -11,6 +11,7 @@ import { notificationOnFailedMove } from "./local/middleware/notificationOnFaile
 import { addPlayerToRoom } from "./room/middleware/addPlayerToRoom";
 import { removePlayerFromRoom } from "./room/middleware/removePlayerFromRoom";
 import { startMatchInRoom } from "./room/middleware/startMatchInRoom";
+import { applyMoveToMatch } from "./room/middleware/applyMoveToMatch";
 
 export const middleware = [
   loggerMiddleware,
@@ -26,4 +27,5 @@ export const middleware = [
   addPlayerToRoom,
   removePlayerFromRoom,
   startMatchInRoom,
+  applyMoveToMatch,
 ];

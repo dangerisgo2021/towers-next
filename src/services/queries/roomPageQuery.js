@@ -2,6 +2,11 @@ import { gql } from "@apollo/client";
 
 export const roomPageQuery = gql`
   query roomPageQuery($roomId: ID) {
+    __type(name: "MoveName") {
+      enumValues {
+        name
+      }
+    }
     room(id: $roomId) {
       id
       name
@@ -20,6 +25,7 @@ export const roomPageQuery = gql`
               x
               y
             }
+            isCastle
             maxTowerSize
             size
             towerPieces {

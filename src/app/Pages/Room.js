@@ -14,6 +14,7 @@ import { useGetRoomIdFromUrl } from "../Components/Room/hooks/useGetRoomIdFromUr
 import { RemoteTowers } from "../Components/Room/RemoteTowers";
 
 const defaultRoom = {};
+const defaultMoves = [];
 const useRoomPageQuery = () => {
   const roomId = useGetRoomIdFromUrl();
   const { data, loading, error, refetch } = useQuery(roomPageQuery, {
@@ -21,6 +22,7 @@ const useRoomPageQuery = () => {
     skip: !roomId,
   });
   const room = get(data, "room", defaultRoom);
+  const moveNames = get(data, "__type.enumValues", defaultMoves);
   const { data: updatedRoomSubscription } = useSubscription(updatedRoom, {
     variables: { roomId },
   });
@@ -37,6 +39,7 @@ const useRoomPageQuery = () => {
 
   return {
     room,
+    moveNames,
     loading,
     error,
   };
@@ -44,17 +47,13 @@ const useRoomPageQuery = () => {
 
 const useRoomContainer = () => {
   const { isAuthenticated } = useAuth0();
-  const { room, loading, error } = useRoomPageQuery();
-  const roomMatchSelector = () => {
-
-    return room ? room.match : undefined;
-  };
+  const { room, loading, error, moveNames } = useRoomPageQuery();
   return {
     loading,
     error,
     room,
     isAuthenticated,
-    roomMatchSelector,
+    moveNames,
   };
 };
 
@@ -64,7 +63,7 @@ export const Room = () => {
     loading,
     error,
     isAuthenticated,
-    roomMatchSelector,
+    moveNames,
   } = useRoomContainer();
 
   if (loading) return <Skeleton />;
@@ -74,11 +73,10 @@ export const Room = () => {
   if (!room) return <Error error="No Room Found" />;
 
   const { started, players } = room;
-
   return (
     <Col className="Room">
       {started ? (
-        <RemoteTowers matchSelector={roomMatchSelector} />
+        <RemoteTowers match={room.match} moveNames={moveNames} />
       ) : (
         <>
           <Divider />

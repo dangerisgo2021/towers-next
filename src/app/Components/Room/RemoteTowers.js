@@ -1,135 +1,66 @@
 import React from "react";
 import classnames from "classnames";
-import { startCase, isEqual } from "lodash";
-import { Button, Row } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { reset, redo, undo, move } from "../../../state/redux/match/actions";
+import { isEqual, isNil } from "lodash";
+import { useDispatch } from "react-redux";
+import { roomMatchMoveClicked } from "../../../state/redux/room/actions";
+import { useGetRoomIdFromUrl } from "./hooks/useGetRoomIdFromUrl";
 
-const useTowersContainer = ({ matchSelector }) => {
+const useTowersContainer = ({ match, moveNames }) => {
+  const roomId = useGetRoomIdFromUrl();
+
   const dispatch = useDispatch();
-  const match = useSelector(matchSelector);
   const {
-    id = "MATCH_ID_MISSING",
+    id,
     board: { cells = [], width = 7, height = 7 } = {},
     maxTowerSize,
-    currentPlayerIndex = "0",
+    currentPlayerIndex = 0,
   } = match || {};
 
+  const moves = moveNames.map(({ name }, i) => {
+    return {
+      id: i,
+      name,
+      text: name,
+      execute: (currentPlayer, selectedCell) => {
+        dispatch(
+          roomMatchMoveClicked({
+            matchId: id,
+            name,
+            currentPlayer,
+            selectedCell,
+            roomId,
+          })
+        );
+      },
+    };
+  });
+
+  const [selectedCell, setSelectedCell] = React.useState(cells[0]);
+
   return {
-    G: {
-      board: { cells, width, height },
-      maxTowerSize,
-    },
-    ctx: { currentPlayer: currentPlayerIndex },
-    moves: {
-      build: (currentPlayer, selectedCell) => {
-        dispatch(
-          move({ matchId: id, name: "build", currentPlayer, selectedCell })
-        );
-      },
-      pushUp: (currentPlayer, selectedCell) => {
-        dispatch(
-          move({
-            matchId: id,
-            name: "push",
-            direction: "up",
-            currentPlayer,
-            selectedCell,
-          })
-        );
-      },
-      pushLeft: (currentPlayer, selectedCell) => {
-        dispatch(
-          move({
-            matchId: id,
-            name: "push",
-            direction: "left",
-            currentPlayer,
-            selectedCell,
-          })
-        );
-      },
-      pushRight: (currentPlayer, selectedCell) => {
-        dispatch(
-          move({
-            matchId: id,
-            name: "push",
-            direction: "right",
-            currentPlayer,
-            selectedCell,
-          })
-        );
-      },
-      pushDown: (currentPlayer, selectedCell) => {
-        dispatch(
-          move({
-            matchId: id,
-            name: "push",
-            direction: "down",
-            currentPlayer,
-            selectedCell,
-          })
-        );
-      },
-    },
-    reset: () => {
-      dispatch(reset({ matchId: id }));
-    },
-    undo: () => {
-      dispatch(undo({ matchId: id }));
-    },
-    redo: () => {
-      dispatch(redo({ matchId: id }));
-    },
+    selectedCell,
+    setSelectedCell,
+    board: { cells, width, height },
+    maxTowerSize,
+    currentPlayer: currentPlayerIndex,
+    moves,
   };
 };
 
-export const RemoteTowers = ({ matchSelector }) => {
+export const RemoteTowers = ({ match, moveNames }) => {
   const {
-    G: {
-      board: { cells, width, height },
-      maxTowerSize,
-    },
-    ctx: { currentPlayer },
+    board: { cells, width, height },
+    maxTowerSize,
+    currentPlayer,
     moves,
-    reset,
-    undo,
-    redo,
-  } = useTowersContainer({ matchSelector });
-  const [selectedCell, setSelectedCell] = React.useState(cells[0]);
+    selectedCell,
+    setSelectedCell,
+  } = useTowersContainer({ match, moveNames });
   const cellWidth = "50px";
-  const actions = Object.entries(moves).map(([id, move]) => ({
-    id,
-    move,
-    text: startCase(id),
-  }));
 
   const selectedController = selectedCell.towerPieces.find((piece, i, array) =>
     array[i + 1] ? array[i + 1].type === "EMPTY" : true
   );
-  const matchActions = [
-    {
-      id: "RESET",
-      text: "RESET",
-      onClick: () => {
-        reset();
-      },
-    },
-    {
-      id: "UNDO",
-      text: "UNDO",
-      onClick: () => {
-        undo();
-      },
-    },
-    {
-      id: "REDO",
-      text: "REDO",
-      onClick: () => {
-        redo();
-      },
-    },
-  ];
   return (
     <div className="TowersBoard">
       <div className="board">
@@ -153,7 +84,9 @@ export const RemoteTowers = ({ matchSelector }) => {
                     key={piece.id}
                     className={classnames(
                       "piece",
-                      piece.owner ? piece.type + piece.owner : piece.type
+                      isNil(piece.owner)
+                        ? piece.type
+                        : `${piece.type}${piece.owner}`
                     )}
                   />
                 ))}
@@ -177,51 +110,37 @@ export const RemoteTowers = ({ matchSelector }) => {
           <span className="info-bit">Size : {selectedCell.size}</span>
         </div>
         <div className="actions">
-          {actions.map((action) => {
+          {moves.map((move) => {
             return (
               <div
-                key={action.id}
+                key={move.id}
                 className="action"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (selectedCell.isCastle && action.id === "build") {
+                  if (selectedCell.isCastle && move.name === "BUILD") {
                     alert("Cannot build on caste");
                   } else if (
-                    action.id === "build" &&
+                    move.name === "BUILD" &&
                     selectedCell.size === maxTowerSize
                   ) {
                     alert("Cannot perform build past max tower height");
                   } else if (selectedController.owner !== currentPlayer) {
+                    console.log({
+                      x: selectedController.owner !== currentPlayer,
+                      owner: selectedController.owner,
+                      currentPlayer,
+                    });
                     alert("Cannot perform action without controlling square");
                   } else {
-                    action.move(currentPlayer, selectedCell);
+                    move.execute(currentPlayer, selectedCell);
                   }
                 }}
               >
-                {action.text}
+                {move.text}
               </div>
             );
           })}
         </div>
-        <Row
-          className="match-actions"
-          style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}
-        >
-          {matchActions.map((matchAction) => {
-            return (
-              <Button
-                key={matchAction.id}
-                className="match-action"
-                onClick={(e) => {
-                  e.preventDefault();
-                  matchAction.onClick(e);
-                }}
-              >
-                {matchAction.text}
-              </Button>
-            );
-          })}
-        </Row>
       </div>
 
       <style jsx>{`
