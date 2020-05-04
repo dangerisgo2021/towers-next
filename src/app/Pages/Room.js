@@ -75,8 +75,14 @@ export const Room = () => {
   const { started, players } = room;
   return (
     <Col className="Room">
-      {started ? (
-        <RemoteTowers match={room.match} moveNames={moveNames} />
+      {isAuthenticated && started ? (
+        <RemoteTowers
+          {...{
+            match: room.match,
+            moveNames,
+            currentPlayer: room.currentPlayer,
+          }}
+        />
       ) : (
         <>
           <Divider />
@@ -84,7 +90,7 @@ export const Room = () => {
           <Divider />
           {!isAuthenticated && <LoginToJoin />}
           <Divider />
-          <StartGame players={players} />
+          {!started && <StartGame players={players} />}
         </>
       )}
     </Col>

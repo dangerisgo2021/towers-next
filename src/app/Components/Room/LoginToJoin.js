@@ -19,7 +19,7 @@ export const LoginToJoin = () => {
           login();
         }}
       >
-        Login to Join
+        Login to Play
       </Button>
     </Row>
   );

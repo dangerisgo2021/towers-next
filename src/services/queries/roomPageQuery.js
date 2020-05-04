@@ -12,10 +12,12 @@ export const roomPageQuery = gql`
       name
       mode
       started
+      currentPlayer
       match {
         id
         created
         started
+        winner
         board {
           width
           height

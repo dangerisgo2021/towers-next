@@ -17,7 +17,6 @@ const useTowersContainer = ({ match, moveNames }) => {
     id,
     board: { cells = [], width = 7, height = 7 } = {},
     maxTowerSize,
-    currentPlayerIndex = 0,
   } = match || {};
 
   const moves = moveNames.map(({ name }, i) => {
@@ -46,7 +45,6 @@ const useTowersContainer = ({ match, moveNames }) => {
     setSelectedCell,
     board: { cells, width, height },
     maxTowerSize,
-    currentPlayer: currentPlayerIndex,
     moves,
     onResetClicked: () => {
       dispatch(roomResetClicked({ roomId }));
@@ -54,11 +52,10 @@ const useTowersContainer = ({ match, moveNames }) => {
   };
 };
 
-export const RemoteTowers = ({ match, moveNames }) => {
+export const RemoteTowers = ({ match, moveNames, currentPlayer }) => {
   const {
     board: { cells, width, height },
     maxTowerSize,
-    currentPlayer,
     moves,
     selectedCell,
     setSelectedCell,
@@ -116,6 +113,7 @@ export const RemoteTowers = ({ match, moveNames }) => {
             Is Castle : {selectedCell.isCastle ? "yes" : "no"}
           </span>
           <span className="info-bit">Size : {selectedCell.size}</span>
+          <span className="info-bit">Winner : {match.winner}</span>
         </div>
         <div className="actions">
           {moves.map((move) => {
