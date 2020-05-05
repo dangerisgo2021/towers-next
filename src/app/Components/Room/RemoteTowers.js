@@ -52,7 +52,7 @@ const useTowersContainer = ({ match, moveNames }) => {
   };
 };
 
-export const RemoteTowers = ({ match, moveNames, currentPlayer }) => {
+export const RemoteTowers = ({ match, moveNames, currentPlayer, victoryProgress }) => {
   const {
     board: { cells, width, height },
     maxTowerSize,
@@ -113,7 +113,7 @@ export const RemoteTowers = ({ match, moveNames, currentPlayer }) => {
             Is Castle : {selectedCell.isCastle ? "yes" : "no"}
           </span>
           <span className="info-bit">Size : {selectedCell.size}</span>
-          <span className="info-bit">Winner : {match.winner}</span>
+          <span className="info-bit">Winner : {victoryProgress.winner}</span>
         </div>
         <div className="actions">
           {moves.map((move) => {

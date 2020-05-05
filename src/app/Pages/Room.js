@@ -81,6 +81,7 @@ export const Room = () => {
             match: room.match,
             moveNames,
             currentPlayer: room.currentPlayer,
+            victoryProgress: room.victoryProgress
           }}
         />
       ) : (

@@ -13,11 +13,18 @@ export const roomPageQuery = gql`
       mode
       started
       currentPlayer
+      victoryProgress {
+        winner
+        playerProgress {
+          player
+          castles
+          crowns
+        }
+      }
       match {
         id
         created
         started
-        winner
         board {
           width
           height
