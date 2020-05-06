@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { notification } from "antd";
 import classnames from "classnames";
 import { isEqual, isNil } from "lodash";
 import { useDispatch } from "react-redux";
@@ -7,9 +8,11 @@ import {
   roomResetClicked,
 } from "../../../state/redux/room/actions";
 import { useGetRoomIdFromUrl } from "./hooks/useGetRoomIdFromUrl";
+import { SelectedCellDetails } from "./SelectedCellDetails";
 import { Button } from "antd";
+import { VictoryProgress } from "./VictoryProgress";
 
-const useTowersContainer = ({ match, moveNames }) => {
+const useTowersContainer = ({ match, moveNames, victoryProgress }) => {
   const roomId = useGetRoomIdFromUrl();
 
   const dispatch = useDispatch();
@@ -18,7 +21,6 @@ const useTowersContainer = ({ match, moveNames }) => {
     board: { cells = [], width = 7, height = 7 } = {},
     maxTowerSize,
   } = match || {};
-
   const moves = moveNames.map(({ name }, i) => {
     return {
       id: i,
@@ -40,6 +42,13 @@ const useTowersContainer = ({ match, moveNames }) => {
 
   const [selectedCell, setSelectedCell] = React.useState(cells[0]);
 
+  useEffect(() => {
+    if (!isNil(victoryProgress.winner)) {
+      notification.open({
+        message: `Congrats ${victoryProgress.winner} you won!!!`,
+      });
+    }
+  }, [victoryProgress.winner]);
   return {
     selectedCell,
     setSelectedCell,
@@ -52,7 +61,13 @@ const useTowersContainer = ({ match, moveNames }) => {
   };
 };
 
-export const RemoteTowers = ({ match, moveNames, currentPlayer, victoryProgress }) => {
+export const RemoteTowers = ({
+  match,
+  moveNames,
+  currentPlayer,
+  player,
+  victoryProgress,
+}) => {
   const {
     board: { cells, width, height },
     maxTowerSize,
@@ -60,12 +75,13 @@ export const RemoteTowers = ({ match, moveNames, currentPlayer, victoryProgress 
     selectedCell,
     setSelectedCell,
     onResetClicked,
-  } = useTowersContainer({ match, moveNames });
+  } = useTowersContainer({ match, moveNames, victoryProgress });
   const cellWidth = "50px";
 
   const selectedController = selectedCell.towerPieces.find((piece, i, array) =>
     array[i + 1] ? array[i + 1].type === "EMPTY" : true
   );
+
   return (
     <div className="TowersBoard">
       <div className="board">
@@ -100,6 +116,11 @@ export const RemoteTowers = ({ match, moveNames, currentPlayer, victoryProgress 
         ))}
       </div>
       <div className="controls">
+        <SelectedCellDetails
+          selectedCell={selectedCell}
+          selectedController={selectedController}
+        />
+        <VictoryProgress victoryProgress={victoryProgress} />
         <div className="info">
           <span className="info-bit">Who's turn? : {currentPlayer}</span>
           <span className="info-bit">
@@ -124,19 +145,34 @@ export const RemoteTowers = ({ match, moveNames, currentPlayer, victoryProgress 
                 onClick={(e) => {
                   e.preventDefault();
                   if (selectedCell.isCastle && move.name === "BUILD") {
-                    alert("Cannot build on caste");
+                    notification.open({
+                      message: "Cannot build on caste",
+                    });
                   } else if (
                     move.name === "BUILD" &&
                     selectedCell.size === maxTowerSize
                   ) {
-                    alert("Cannot perform build past max tower height");
-                  } else if (selectedController.owner !== currentPlayer) {
-                    console.log({
-                      x: selectedController.owner !== currentPlayer,
-                      owner: selectedController.owner,
-                      currentPlayer,
+                    notification.open({
+                      message: "Cannot perform build past max tower height",
                     });
-                    alert("Cannot perform action without controlling square");
+                  } else if (selectedController.owner !== currentPlayer) {
+                    notification.open({
+                      message:
+                        "Cannot perform action without controlling square",
+                    });
+                  } else if (player !== currentPlayer) {
+                    notification.open({
+                      message: "Cannot perform action when its not your turn",
+                    });
+                  } else if (player !== selectedController.owner) {
+                    notification.open({
+                      message:
+                        "Cannot perform action when you dont control the tower",
+                    });
+                  } else if (!isNil(victoryProgress.winner)) {
+                    notification.open({
+                      message: "Cannot perform action when game has a winner",
+                    });
                   } else {
                     move.execute(currentPlayer, selectedCell);
                   }

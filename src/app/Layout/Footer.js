@@ -5,6 +5,6 @@ const { Footer: AntFooter } = Layout;
 export const Footer = () => (
   <>
     <Divider />
-    <AntFooter>Towers Game ©2020 Created by Clark</AntFooter>
+    <AntFooter>Towers Game ©2020 Created by Clark Luskin</AntFooter>
   </>
 );

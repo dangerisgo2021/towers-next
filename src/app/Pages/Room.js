@@ -2,8 +2,9 @@ import React from "react";
 import { useQuery, useSubscription } from "@apollo/client";
 import { Col, Divider, Skeleton } from "antd";
 import { get } from "lodash";
-import { Error } from "../Components/Error";
+import { useSelector } from "react-redux";
 
+import { Error } from "../Components/Error";
 import { useAuth0 } from "../Auth/auth0/react-auth0-wrapper";
 import { roomPageQuery } from "../../services/queries/roomPageQuery";
 import { LoginToJoin } from "../Components/Room/LoginToJoin";
@@ -12,6 +13,7 @@ import { JoinGame } from "../Components/Room/JoinGame";
 import { updatedRoom } from "../../services/subscriptions/updatedRoom";
 import { useGetRoomIdFromUrl } from "../Components/Room/hooks/useGetRoomIdFromUrl";
 import { RemoteTowers } from "../Components/Room/RemoteTowers";
+import { getProfileId } from "../../state/redux/auth/selectors/getProfileId";
 
 const defaultRoom = {};
 const defaultMoves = [];
@@ -47,6 +49,7 @@ const useRoomPageQuery = () => {
 
 const useRoomContainer = () => {
   const { isAuthenticated } = useAuth0();
+  const profileId = useSelector(getProfileId);
   const { room, loading, error, moveNames } = useRoomPageQuery();
   return {
     loading,
@@ -54,6 +57,7 @@ const useRoomContainer = () => {
     room,
     isAuthenticated,
     moveNames,
+    profileId,
   };
 };
 
@@ -64,6 +68,7 @@ export const Room = () => {
     error,
     isAuthenticated,
     moveNames,
+    profileId,
   } = useRoomContainer();
 
   if (loading) return <Skeleton />;
@@ -73,6 +78,8 @@ export const Room = () => {
   if (!room) return <Error error="No Room Found" />;
 
   const { started, players } = room;
+  const player =
+    players && players.findIndex(({ profile: { id } }) => id === profileId);
   return (
     <Col className="Room">
       {isAuthenticated && started ? (
@@ -80,8 +87,9 @@ export const Room = () => {
           {...{
             match: room.match,
             moveNames,
+            player,
             currentPlayer: room.currentPlayer,
-            victoryProgress: room.victoryProgress
+            victoryProgress: room.victoryProgress,
           }}
         />
       ) : (
