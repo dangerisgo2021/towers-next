@@ -40,7 +40,7 @@ const useTowersContainer = ({ match, moveNames, victoryProgress }) => {
   const [selectedCell, setSelectedCell] = React.useState(cells[0]);
 
   useEffect(() => {
-    if (!isNil(victoryProgress.winner)) {
+    if (victoryProgress && !isNil(victoryProgress.winner)) {
       notification.open({
         message: `Congrats Player ${victoryProgress.winner} you won!!!`,
       });
