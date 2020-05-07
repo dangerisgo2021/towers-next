@@ -162,7 +162,7 @@ export const RemoteTowers = ({
                     notification.open({
                       message: "Cannot perform action when its not your turn",
                     });
-                  } else if (!isNil(victoryProgress.winner)) {
+                  } else if (!isNil(victoryProgress && victoryProgress.winner)) {
                     notification.open({
                       message: "Cannot perform action when game has a winner",
                     });
