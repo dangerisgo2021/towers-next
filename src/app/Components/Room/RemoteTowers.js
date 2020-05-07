@@ -3,9 +3,7 @@ import { notification } from "antd";
 import classnames from "classnames";
 import { isEqual, isNil } from "lodash";
 import { useDispatch } from "react-redux";
-import {
-  roomMatchMoveClicked,
-} from "../../../state/redux/room/actions";
+import { roomMatchMoveClicked } from "../../../state/redux/room/actions";
 import { useGetRoomIdFromUrl } from "./hooks/useGetRoomIdFromUrl";
 import { SelectedCellDetails } from "./SelectedCellDetails";
 import { Button } from "antd";
@@ -44,10 +42,10 @@ const useTowersContainer = ({ match, moveNames, victoryProgress }) => {
   useEffect(() => {
     if (!isNil(victoryProgress.winner)) {
       notification.open({
-        message: `Congrats ${victoryProgress.winner} you won!!!`,
+        message: `Congrats Player ${victoryProgress.winner} you won!!!`,
       });
     }
-  }, [victoryProgress.winner]);
+  }, [victoryProgress]);
   return {
     selectedCell,
     setSelectedCell,
@@ -80,8 +78,12 @@ export const RemoteTowers = ({
   return (
     <div className="TowersBoard">
       <SelectedCellDetails
-        selectedCell={selectedCell}
-        selectedController={selectedController}
+        {...{
+          selectedCell,
+          selectedController,
+          player,
+          currentPlayer,
+        }}
       />
       <div className="board">
         {cells.map((cell) => (
@@ -129,6 +131,8 @@ export const RemoteTowers = ({
                   gridArea: move.name,
                   gridRow: move.name === "BUILD" ? "1 / span 2" : undefined,
                   height: move.name === "BUILD" ? "100%" : undefined,
+                  backgroundColor: player === 0 ? "#deb0b0" : "lightblue",
+                  border: "1px solid black",
                 }}
                 className={classnames("action", move.name)}
                 onClick={(e) => {
@@ -152,7 +156,7 @@ export const RemoteTowers = ({
                   } else if (player !== selectedController.owner) {
                     notification.open({
                       message:
-                        "Cannot perform action when thw tower is not yours",
+                        "Cannot perform action when the tower is not yours",
                     });
                   } else if (player !== currentPlayer) {
                     notification.open({

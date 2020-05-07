@@ -3,14 +3,19 @@ import { Row, Col } from "antd";
 import { GiStoneTower, GiCastle } from "react-icons/gi";
 import { isNil } from "lodash";
 
-export const SelectedCellDetails = ({ selectedCell, selectedController }) => (
+export const SelectedCellDetails = ({
+  selectedCell,
+  selectedController,
+  player,
+  currentPlayer,
+}) => (
   <Row
     align="middle"
-    justify="space-around"
+    justify="space-between"
     style={{
       margin: "1vw",
       padding: "1vw",
-      fontSize: "2.5em",
+      fontSize: "2em",
       backgroundColor: isNil(selectedController.owner)
         ? "grey"
         : selectedController.owner
@@ -18,18 +23,25 @@ export const SelectedCellDetails = ({ selectedCell, selectedController }) => (
         : "red",
     }}
   >
-    <Col>Selected</Col>
+    <Col>
+      Player {player} {player === currentPlayer ? "Go" : "Wait"}
+    </Col>
     <Col>
       <Row align="middle" justify="space-around">
+        <Col>Selected</Col>
         <Col>
-          <Row align="middle">
-            <GiStoneTower />
-            <div>{selectedCell.size}</div>
-            <GiCastle
-              style={{
-                color: selectedCell.isCastle ? "gold" : undefined,
-              }}
-            />
+          <Row align="middle" justify="space-around">
+            <Col>
+              <Row align="middle">
+                <GiStoneTower />
+                <div>{selectedCell.size}</div>
+                <GiCastle
+                  style={{
+                    color: selectedCell.isCastle ? "gold" : undefined,
+                  }}
+                />
+              </Row>
+            </Col>
           </Row>
         </Col>
       </Row>
