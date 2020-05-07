@@ -11,7 +11,7 @@ const onRedirectCallback = (appState) => {
   }
 };
 
-const origin = isClient ? window.location.origin : "http://localhost:3000/";
+const origin = isClient ? window.location.origin : "http://localhost:3000";
 console.log({ origin });
 export const auth0Config = {
   domain: "dangerisgo2021.auth0.com",

@@ -5,7 +5,6 @@ import { isEqual, isNil } from "lodash";
 import { useDispatch } from "react-redux";
 import {
   roomMatchMoveClicked,
-  roomResetClicked,
 } from "../../../state/redux/room/actions";
 import { useGetRoomIdFromUrl } from "./hooks/useGetRoomIdFromUrl";
 import { SelectedCellDetails } from "./SelectedCellDetails";
@@ -55,9 +54,6 @@ const useTowersContainer = ({ match, moveNames, victoryProgress }) => {
     board: { cells, width, height },
     maxTowerSize,
     moves,
-    onResetClicked: () => {
-      dispatch(roomResetClicked({ roomId }));
-    },
   };
 };
 
@@ -74,7 +70,6 @@ export const RemoteTowers = ({
     moves,
     selectedCell,
     setSelectedCell,
-    onResetClicked,
   } = useTowersContainer({ match, moveNames, victoryProgress });
   const cellWidth = "50px";
 
@@ -84,6 +79,10 @@ export const RemoteTowers = ({
 
   return (
     <div className="TowersBoard">
+      <SelectedCellDetails
+        selectedCell={selectedCell}
+        selectedController={selectedController}
+      />
       <div className="board">
         {cells.map((cell) => (
           <div
@@ -116,32 +115,22 @@ export const RemoteTowers = ({
         ))}
       </div>
       <div className="controls">
-        <SelectedCellDetails
-          selectedCell={selectedCell}
-          selectedController={selectedController}
+        <VictoryProgress
+          victoryProgress={victoryProgress}
+          currentPlayer={currentPlayer}
+          player={player}
         />
-        <VictoryProgress victoryProgress={victoryProgress} />
-        <div className="info">
-          <span className="info-bit">Who's turn? : {currentPlayer}</span>
-          <span className="info-bit">
-            Selected: [
-            {`${selectedCell.location.x}, ${selectedCell.location.y}`}]
-          </span>
-          <span className="info-bit">
-            Selected Tower's Controller : {selectedController.owner || "NONE"}
-          </span>
-          <span className="info-bit">
-            Is Castle : {selectedCell.isCastle ? "yes" : "no"}
-          </span>
-          <span className="info-bit">Size : {selectedCell.size}</span>
-          <span className="info-bit">Winner : {victoryProgress.winner}</span>
-        </div>
         <div className="actions">
           {moves.map((move) => {
             return (
               <Button
                 key={move.id}
-                className="action"
+                style={{
+                  gridArea: move.name,
+                  gridRow: move.name === "BUILD" ? "1 / span 2" : undefined,
+                  height: move.name === "BUILD" ? "100%" : undefined,
+                }}
+                className={classnames("action", move.name)}
                 onClick={(e) => {
                   e.preventDefault();
                   if (selectedCell.isCastle && move.name === "BUILD") {
@@ -160,14 +149,14 @@ export const RemoteTowers = ({
                       message:
                         "Cannot perform action without controlling square",
                     });
-                  } else if (player !== currentPlayer) {
-                    notification.open({
-                      message: "Cannot perform action when its not your turn",
-                    });
                   } else if (player !== selectedController.owner) {
                     notification.open({
                       message:
-                        "Cannot perform action when you dont control the tower",
+                        "Cannot perform action when thw tower is not yours",
+                    });
+                  } else if (player !== currentPlayer) {
+                    notification.open({
+                      message: "Cannot perform action when its not your turn",
                     });
                   } else if (!isNil(victoryProgress.winner)) {
                     notification.open({
@@ -183,14 +172,6 @@ export const RemoteTowers = ({
             );
           })}
         </div>
-        <Button
-          className="reset"
-          onClick={() => {
-            onResetClicked();
-          }}
-        >
-          RESET
-        </Button>
       </div>
 
       <style jsx>{`
@@ -250,7 +231,9 @@ export const RemoteTowers = ({
         }
         .actions {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
+          grid-template-areas:
+            "BUILD PUSH_LEFT PUSH_RIGHT"
+            "BUILD PUSH_UP PUSH_DOWN";
         }
 
         .info {

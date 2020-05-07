@@ -25,8 +25,11 @@ export const SelectedCellDetails = ({ selectedCell, selectedController }) => (
           <Row align="middle">
             <GiStoneTower />
             <div>{selectedCell.size}</div>
-            <GiCastle />
-            <div>{selectedCell.isCastle ? "Y" : "N"}</div>
+            <GiCastle
+              style={{
+                color: selectedCell.isCastle ? "gold" : undefined,
+              }}
+            />
           </Row>
         </Col>
       </Row>
