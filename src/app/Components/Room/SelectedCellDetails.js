@@ -13,9 +13,8 @@ export const SelectedCellDetails = ({
     align="middle"
     justify="space-between"
     style={{
-      margin: "1vw",
-      padding: "1vw",
-      fontSize: "2em",
+      fontSize: "1.5em",
+      border: "1vw solid black",
       backgroundColor: isNil(selectedController.owner)
         ? "grey"
         : selectedController.owner

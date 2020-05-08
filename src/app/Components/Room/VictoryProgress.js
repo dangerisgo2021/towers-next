@@ -27,15 +27,15 @@ export const VictoryProgress = ({ victoryProgress, currentPlayer, player }) => {
       >
         <Row align="middle">
           <Col>
-            <GiCastle style={{ color: "red", fontSize: "4em" }} />
+            <GiCastle style={{ color: "red", fontSize: "3em" }} />
           </Col>
-          <Col style={{ fontSize: "3em" }}> {player1.castles}/4</Col>
+          <Col style={{ fontSize: "2em" }}> {player1.castles}/4</Col>
           <Col>
             <Row>
               <GiImperialCrown
                 style={{
                   color: player1.crowns > 2 ? "gold" : undefined,
-                  fontSize: "2em",
+                  fontSize: "1.5em",
                 }}
               />
             </Row>
@@ -43,7 +43,7 @@ export const VictoryProgress = ({ victoryProgress, currentPlayer, player }) => {
               <GiImperialCrown
                 style={{
                   color: player1.crowns > 1 ? "gold" : undefined,
-                  fontSize: "2em",
+                  fontSize: "1.5em",
                 }}
               />
             </Row>
@@ -51,7 +51,7 @@ export const VictoryProgress = ({ victoryProgress, currentPlayer, player }) => {
               <GiImperialCrown
                 style={{
                   color: player1.crowns > 0 ? "gold" : undefined,
-                  fontSize: "2em",
+                  fontSize: "1.5em",
                 }}
               />
             </Row>
@@ -67,15 +67,15 @@ export const VictoryProgress = ({ victoryProgress, currentPlayer, player }) => {
       >
         <Row align="middle">
           <Col>
-            <GiCastle style={{ color: "blue", fontSize: "4em" }} />
+            <GiCastle style={{ color: "blue", fontSize: "3em" }} />
           </Col>
-          <Col style={{ fontSize: "3em" }}> {player2.castles}/4</Col>
+          <Col style={{ fontSize: "1.5em" }}> {player2.castles}/4</Col>
           <Col>
             <Row>
               <GiImperialCrown
                 style={{
                   color: player2.crowns > 2 ? "gold" : undefined,
-                  fontSize: "2em",
+                  fontSize: "1.5em",
                 }}
               />
             </Row>
@@ -83,7 +83,7 @@ export const VictoryProgress = ({ victoryProgress, currentPlayer, player }) => {
               <GiImperialCrown
                 style={{
                   color: player2.crowns > 1 ? "gold" : undefined,
-                  fontSize: "2em",
+                  fontSize: "1.5em",
                 }}
               />
             </Row>
