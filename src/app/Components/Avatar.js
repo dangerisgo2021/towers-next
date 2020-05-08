@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar as AntAvatar } from "antd";
+import { Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { words } from "lodash";
 
@@ -7,20 +7,7 @@ import { useAuth0 } from "../Auth/auth0/react-auth0-wrapper";
 import { useDispatch } from "react-redux";
 import { userReceived } from "../../state/redux/auth/actions";
 
-const AvatarRender = ({ user, login, logout, name, loading }) => {
-  return user ? (
-    <AntAvatar size="large" onClick={() => !loading && logout()}>
-      {name}
-    </AntAvatar>
-  ) : (
-    <AntAvatar
-      size="large"
-      icon={<UserOutlined onClick={() => !loading && login({})} />}
-    />
-  );
-};
-
-export const Avatar = () => {
+const useAvatarContainer = () => {
   const dispatch = useDispatch();
   const { loading, user, loginWithPopup, logout } = useAuth0();
   React.useEffect(() => {
@@ -30,13 +17,28 @@ export const Avatar = () => {
   }, [user]);
   const name = user ? words(user.name).map((name) => name[0]) : "#";
 
-  return (
-    <AvatarRender
-      name={name}
-      loading={loading}
-      user={user}
-      login={loginWithPopup}
-      logout={logout}
+  return { user, login: loginWithPopup, logout, name, loading };
+};
+export const Avatar = () => {
+  const { user, login, logout, name, loading } = useAvatarContainer();
+
+  return user ? (
+    <Button
+      shape="circle"
+      size="large"
+      onClick={() => {
+        alert("hi");
+        !loading && logout();
+      }}
+    >
+      {name}
+    </Button>
+  ) : (
+    <Button
+      size="large"
+      shape="circle"
+      onClick={() => !loading && login({})}
+      icon={<UserOutlined />}
     />
   );
 };

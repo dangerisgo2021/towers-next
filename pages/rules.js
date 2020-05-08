@@ -1,6 +1,4 @@
 import React from "react";
-import { Row } from "antd";
-
-const Rules = () => <Row> Rules</Row>;
+import { Rules } from "../src/app/Pages/Rules";
 
 export default Rules;
