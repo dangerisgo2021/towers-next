@@ -23,8 +23,8 @@ export const SelectedCellDetails = ({
            }}
          >
            <Col>
-             Player {player === 0 ? "Red" : "Blue"}
-             {player === currentPlayer ? "Go" : "Wait"}
+             {player === 0 ? "Red" : "Blue"} Player
+             {player === currentPlayer ? " Go" : " Wait"}
            </Col>
            <Col>
              <Row align="middle" justify="space-around">
