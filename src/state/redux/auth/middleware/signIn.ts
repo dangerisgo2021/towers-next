@@ -5,8 +5,6 @@ export const signInUser = () => (next) => async (action) => {
   next(action);
 
   if (action.type === userLoginRequested.type) {
-    console.log("starting sign-in");
-    const result = await signIn();
-    console.log("sign-in", { result });
+    await signIn();
   }
 };

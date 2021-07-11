@@ -7,6 +7,11 @@ export const userReceived = actionCreatorFactory({
   type: "userReceived",
 });
 
+export const sessionReceived = actionCreatorFactory({
+  namespace,
+  type: "sessionReceived",
+});
+
 export const profileReceived = actionCreatorFactory({
   namespace,
   type: "profileReceived",
