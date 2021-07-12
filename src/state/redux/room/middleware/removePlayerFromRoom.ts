@@ -1,5 +1,5 @@
 import { leaveRoomClicked } from "state/redux/room/actions";
-import { apolloClient } from "services/apollo";
+import { apolloClient } from "services/gateway/graphql/initGraphqlClient";
 import { removePlayerFromRoom as removePlayerFromRoomMutation } from "services/mutations/removePlayerFromRoom";
 import { getProfileId } from "state/redux/auth/selectors/getProfileId";
 

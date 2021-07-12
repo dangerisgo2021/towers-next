@@ -1,9 +1,8 @@
 import React from "react";
-import { Button, Layout, Row } from "antd";
+import { Button, Col, Layout, Row } from "antd";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  MenuOutlined,
 } from "@ant-design/icons";
 
 import { Avatar } from "app/components/Avatar";
@@ -23,22 +22,21 @@ export const Header = () => {
   return (
     <AntHeader style={{ padding: "0 1vw" }}>
       <Row justify="space-between" align="middle" style={{ height: "100%" }}>
-        {isSiderLocked && (
-          <Button key="0" size="large">
-            <MenuOutlined />
-          </Button>
-        )}
-        {!isSiderLocked &&
-          (isSiderCollapsed ? (
-            <Button key="1" size="large" onClick={handleOpenMenuButtonClicked}>
-              <MenuUnfoldOutlined />
-            </Button>
-          ) : (
-            <Button key="2" size="large">
-              <MenuFoldOutlined />
-            </Button>
-          ))}
-        <Avatar />
+        <Col>
+          {!isSiderLocked &&
+            (isSiderCollapsed ? (
+              <Button size="large" onClick={handleOpenMenuButtonClicked}>
+                <MenuUnfoldOutlined />
+              </Button>
+            ) : (
+              <Button size="large">
+                <MenuFoldOutlined />
+              </Button>
+            ))}
+        </Col>
+        <Col>
+          <Avatar />
+        </Col>
       </Row>
     </AntHeader>
   );

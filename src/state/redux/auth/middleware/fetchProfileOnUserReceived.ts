@@ -1,6 +1,6 @@
 import { get } from "lodash";
 import { profileReceived, userReceived } from "state/redux/auth/actions";
-import { apolloClient } from "services/apollo";
+import { apolloClient } from "services/gateway/graphql/initGraphqlClient";
 import { profileQuery } from "services/queries/profileQuery";
 
 export const fetchProfileOnUserReceived = (store) => (next) => async (

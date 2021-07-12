@@ -1,5 +1,5 @@
 import { roomMatchMoveClicked } from "state/redux/room/actions";
-import { apolloClient } from "services/apollo";
+import { apolloClient } from "services/gateway/graphql/initGraphqlClient";
 import { applyMoveToMatch as applyMoveToMatchMutation } from "services/mutations/applyMoveToMatch";
 
 export const applyMoveToMatch = () => (next) => (action) => {

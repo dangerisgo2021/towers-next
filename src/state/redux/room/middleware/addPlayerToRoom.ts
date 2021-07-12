@@ -1,5 +1,5 @@
 import { joinRoomClicked } from "state/redux/room/actions";
-import { apolloClient } from "services/apollo";
+import { apolloClient } from "services/gateway/graphql/initGraphqlClient";
 import { addPlayerToRoom as addPlayerToRoomMutation } from "services/mutations/addPlayerToRoom";
 import { getProfileId } from "state/redux/auth/selectors/getProfileId";
 
