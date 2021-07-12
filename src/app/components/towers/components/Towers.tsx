@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import { startCase } from "lodash";
 import { Button, Row } from "antd";
-import {useTowersContainer} from "app/components/towers/hooks/useTowersContainer";
+import { useTowersContainer } from "app/components/towers/hooks/useTowersContainer";
 
 export const Towers = ({ matchSelector }) => {
   const {
