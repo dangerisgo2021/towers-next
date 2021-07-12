@@ -14,8 +14,9 @@ import { startMatchInRoom } from "state/redux/room/middleware/startMatchInRoom";
 import { applyMoveToMatch } from "state/redux/room/middleware/applyMoveToMatch";
 import { resetRoomMatch } from "state/redux/room/middleware/resetRoomMatch";
 import { collapseSliderOnSideNavItemClicked } from "state/redux/sider/middleware/collapseSliderOnSideNavItemClicked";
-import { signInUser } from "state/redux/auth/middleware/signIn";
+import { startSession } from "state/redux/auth/middleware/startSession";
 import { getLatestSession } from "state/redux/auth/middleware/getLatestSession";
+import { endSession } from "state/redux/auth/middleware/endSession";
 
 export const middleware = [
   loggerMiddleware,
@@ -34,6 +35,7 @@ export const middleware = [
   applyMoveToMatch,
   resetRoomMatch,
   collapseSliderOnSideNavItemClicked,
-  signInUser,
+  startSession,
   getLatestSession,
+  endSession,
 ];

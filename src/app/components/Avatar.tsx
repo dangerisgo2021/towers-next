@@ -1,21 +1,21 @@
 import React from "react";
-import { Button } from "antd";
+import { Avatar as AntAvatar, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useAvatarContainer } from "app/components/towers/hooks/useAvatarContainer";
 
 export const Avatar = () => {
-  const { user, login, logout, name, loading } = useAvatarContainer();
+  const { user, login, logout, loading } = useAvatarContainer();
 
   return user ? (
     <Button
       shape="circle"
       size="large"
       onClick={() => {
-        alert("");
         !loading && logout();
       }}
+      style={{ padding: "0", border: 0 }}
     >
-      {name}
+      <AntAvatar src={user.image} shape="circle" size="large" />
     </Button>
   ) : (
     <Button size="large" shape="circle" onClick={() => !loading && login()}>
