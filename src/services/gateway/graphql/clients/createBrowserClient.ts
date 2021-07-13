@@ -9,20 +9,20 @@ import {
 import { getMainDefinition } from "@apollo/client/utilities";
 import { WebSocketLink } from "@apollo/link-ws";
 import { getSessionId } from "state/redux/session/selectors/getSessionId";
+import { getAccessToken } from "state/redux/auth/selectors/getAccessToken";
 
 export const createBrowserClient = ({ initialState, uri }) => {
   const httpLink = new HttpLink({ uri });
 
   const contextMiddleware = new ApolloLink((operation, forward) => {
-    const session = getSessionId(
-      (window as any)?.__REDUX_STORE__?.getState()
-    );
-
+    const state = (window as any)?.__REDUX_STORE__?.getState();
+    const session = getSessionId(state);
+    const accessToken = getAccessToken(state);
     operation.setContext(({ headers = {} }) => {
       return {
         headers: {
           ...headers,
-          authorization: session?.auth?.accessToken,
+          authorization: accessToken,
           session: session?.id,
           client: session?.clientId,
         },

@@ -48,7 +48,7 @@ export const roomPageQuery = gql`
       players {
         profile {
           id
-          agentId
+          userId
           name
         }
       }

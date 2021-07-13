@@ -14,7 +14,7 @@ export const Room = () => {
     error,
     isAuthenticated,
     moveNames,
-    profileId,
+    userId,
   } = useRoomContainer();
 
   if (loading) return <Skeleton />;
@@ -25,7 +25,8 @@ export const Room = () => {
 
   const { started, players } = room;
   const player =
-    players && players.findIndex(({ profile: { id } }) => id === profileId);
+    players && players.findIndex(({ profile }) => profile?.userId === userId);
+  console.log({ player, userId, players });
   return (
     <Col className="Room">
       {isAuthenticated && started ? (

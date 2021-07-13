@@ -3,7 +3,6 @@ import { throttleMiddleware } from "state/redux/utils/middleware/throttleMiddlew
 import { debounceMiddleware } from "state/redux/utils/middleware/debounceMiddleware";
 import { expandSliderOnOpenMenuButtonClick } from "state/redux/sider/middleware/expandSliderOnOpenMenuButtonClick";
 import { collapseSliderOnOutsideExpandedSliderClick } from "state/redux/sider/middleware/collapseSliderOnOutsideExpandedSliderClick";
-import { fetchProfile } from "state/redux/auth/middleware/fetchProfile";
 import { openCreateRoomModal } from "state/redux/createRoomModal/middleware/openCreateRoomModal";
 import { submitCreateRoomForm } from "state/redux/createRoomModal/middleware/submitCreateRoomForm";
 import { navigateToRoom } from "state/redux/home/middleware/navigateToRoom";
@@ -24,7 +23,6 @@ export const middleware = [
   debounceMiddleware,
   expandSliderOnOpenMenuButtonClick,
   collapseSliderOnOutsideExpandedSliderClick,
-  fetchProfile,
   openCreateRoomModal,
   submitCreateRoomForm,
   navigateToRoom,

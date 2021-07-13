@@ -1,10 +1,10 @@
 import { gql } from "@apollo/client";
 
 export const profileQuery = gql`
-  query profileQuery($agentId: ID) {
-    profile(agentId: $agentId) {
+  query profileQuery($userId: ID) {
+    profile(userId: $userId) {
       id
-      agentId
+      userId
       created
       updated
       rating

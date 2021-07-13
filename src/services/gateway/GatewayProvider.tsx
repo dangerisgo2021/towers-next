@@ -8,7 +8,6 @@ const ApolloProvider = dynamic(
       const graphqlClient = await import(
         "services/gateway/graphql/initGraphqlClient"
       ).then(({ initGraphqlClient }) => initGraphqlClient());
-      console.log({ graphqlClient });
       return ({ children }) => {
         return (
           <ApolloProvider client={graphqlClient}>{children}</ApolloProvider>

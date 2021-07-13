@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 import { getIsAuthenticated } from "state/redux/auth/selectors/getIsAuthenticated";
-import { getProfileId } from "state/redux/auth/selectors/getProfileId";
 import { useRoomPageQuery } from "app/pages/hooks/useRoomPageQuery";
+import { getSessionUserId } from "state/redux/auth/selectors/getSessionUserId";
 
 export const useRoomContainer = () => {
   const isAuthenticated = useSelector(getIsAuthenticated);
-  const profileId = useSelector(getProfileId);
+  const userId = useSelector(getSessionUserId);
   const { room, loading, error, moveNames } = useRoomPageQuery();
   return {
     loading,
@@ -13,6 +13,6 @@ export const useRoomContainer = () => {
     room,
     isAuthenticated,
     moveNames,
-    profileId,
+    userId,
   };
 };
