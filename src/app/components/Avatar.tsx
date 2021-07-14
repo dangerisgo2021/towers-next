@@ -15,7 +15,16 @@ export const Avatar = () => {
       }}
       style={{ padding: "0", border: 0 }}
     >
-      <AntAvatar src={user.image} shape="circle" size="large" />
+      {user.image && <AntAvatar src={user.image} shape="circle" size="large" />}
+      {user.email && (
+        <AntAvatar
+          shape="circle"
+          size="large"
+          style={{ textTransform: "capitalize" }}
+        >
+          {user.email[0]}
+        </AntAvatar>
+      )}
     </Button>
   ) : (
     <Button size="large" shape="circle" onClick={() => !loading && login()}>

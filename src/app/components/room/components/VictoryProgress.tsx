@@ -35,7 +35,7 @@ export const VictoryProgress = ({ victoryProgress, currentPlayer, player }) => {
               <GiImperialCrown
                 style={{
                   color: player1.crowns > 2 ? "gold" : undefined,
-                  fontSize: "1.5em",
+                  fontSize: "2em",
                 }}
               />
             </Row>
@@ -43,7 +43,7 @@ export const VictoryProgress = ({ victoryProgress, currentPlayer, player }) => {
               <GiImperialCrown
                 style={{
                   color: player1.crowns > 1 ? "gold" : undefined,
-                  fontSize: "1.5em",
+                  fontSize: "2em",
                 }}
               />
             </Row>
@@ -51,7 +51,7 @@ export const VictoryProgress = ({ victoryProgress, currentPlayer, player }) => {
               <GiImperialCrown
                 style={{
                   color: player1.crowns > 0 ? "gold" : undefined,
-                  fontSize: "1.5em",
+                  fontSize: "2em",
                 }}
               />
             </Row>
@@ -75,7 +75,7 @@ export const VictoryProgress = ({ victoryProgress, currentPlayer, player }) => {
               <GiImperialCrown
                 style={{
                   color: player2.crowns > 2 ? "gold" : undefined,
-                  fontSize: "1.5em",
+                  fontSize: "2em",
                 }}
               />
             </Row>
@@ -83,7 +83,7 @@ export const VictoryProgress = ({ victoryProgress, currentPlayer, player }) => {
               <GiImperialCrown
                 style={{
                   color: player2.crowns > 1 ? "gold" : undefined,
-                  fontSize: "1.5em",
+                  fontSize: "2em",
                 }}
               />
             </Row>
