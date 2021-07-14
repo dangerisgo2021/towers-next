@@ -16,7 +16,7 @@ export const Avatar = () => {
       style={{ padding: "0", border: 0 }}
     >
       {user.image && <AntAvatar src={user.image} shape="circle" size="large" />}
-      {user.email && (
+      {!user.image && user.email && (
         <AntAvatar
           shape="circle"
           size="large"
