@@ -1,6 +1,6 @@
 import { leaveRoomClicked } from "state/redux/room/actions";
 import { apolloClient } from "services/gateway/graphql/initGraphqlClient";
-import { removePlayerFromRoom as removePlayerFromRoomMutation } from "services/mutations/removePlayerFromRoom";
+import { removePlayerFromRoomMutation } from "services/mutations/removePlayerFromRoomMutation";
 
 export const removePlayerFromRoom = () => (next) => (action) => {
   next(action);

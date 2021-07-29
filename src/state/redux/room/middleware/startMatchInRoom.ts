@@ -1,6 +1,6 @@
 import { startButtonClicked } from "state/redux/room/actions";
 import { apolloClient } from "services/gateway/graphql/initGraphqlClient";
-import { startMatchInRoom as startMatchInRoomMutation } from "services/mutations/startMatchInRoom";
+import { startMatchInRoomMutation } from "services/mutations/startMatchInRoomMutation";
 
 export const startMatchInRoom = () => (next) => (action) => {
   next(action);

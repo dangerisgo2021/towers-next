@@ -4,7 +4,7 @@ import { isEqual, isNil } from "lodash";
 import { SelectedCellDetails } from "app/components/room/components/SelectedCellDetails";
 import { Button } from "antd";
 import { VictoryProgress } from "app/components/room/components/VictoryProgress";
-import { useRemoteTowersContainer } from "app/components/room/hooks/useRemoteTowersContainer"
+import { useRemoteTowersContainer } from "app/components/room/hooks/useRemoteTowersContainer";
 import classnames from "classnames";
 
 export const RemoteTowers = ({
@@ -20,15 +20,14 @@ export const RemoteTowers = ({
     moves,
     selectedCell,
     setSelectedCell,
-  } = useRemoteTowersContainer({ match, moveNames, victoryProgress });
+  } = useRemoteTowersContainer({ match, moveNames, victoryProgress, player });
   const cellWidth = "50px";
 
   const selectedController = selectedCell.towerPieces.find((piece, i, array) =>
     array[i + 1] ? array[i + 1].type === "EMPTY" : true
   );
-
   return (
-    <div className="TowersBoard">
+    <div className="RemoteTowers TowersBoard">
       <SelectedCellDetails
         {...{
           selectedCell,
@@ -46,7 +45,7 @@ export const RemoteTowers = ({
             })}
             onClick={(e) => {
               e.preventDefault();
-              setSelectedCell(cell);
+              setSelectedCell({ selectedCell: cell });
             }}
           >
             <div className="pieces">
@@ -58,6 +57,7 @@ export const RemoteTowers = ({
                     key={piece.id}
                     className={classnames(
                       "piece",
+                      { preview: piece.preview },
                       isNil(piece.owner)
                         ? piece.type
                         : `${piece.type}${piece.owner}`
@@ -114,7 +114,9 @@ export const RemoteTowers = ({
                     notification.open({
                       message: "Cannot perform action when its not your turn",
                     });
-                  } else if (!isNil(victoryProgress && victoryProgress.winner)) {
+                  } else if (
+                    !isNil(victoryProgress && victoryProgress.winner)
+                  ) {
                     notification.open({
                       message: "Cannot perform action when game has a winner",
                     });
@@ -199,6 +201,9 @@ export const RemoteTowers = ({
         }
         .selected {
           border: 2px solid gold;
+        }
+        .preview {
+          border: 1px solid goldenrod;
         }
         .info-bit {
           border: 1px solid black;

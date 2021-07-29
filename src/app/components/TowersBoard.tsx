@@ -64,7 +64,7 @@ export const TowersBoard = (props) => {
             })}
             onClick={(e) => {
               e.preventDefault();
-              setSelectedCell(cell);
+              setSelectedCell({ selectedCell: cell });
             }}
           >
             <div className="pieces">

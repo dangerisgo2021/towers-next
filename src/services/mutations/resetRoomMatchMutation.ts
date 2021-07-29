@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const resetRoomMatch = gql`
+export const resetRoomMatchMutation = gql`
   mutation resetMatch($roomId: ID) {
     resetMatch(roomId: $roomId) {
       id

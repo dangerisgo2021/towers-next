@@ -1,7 +1,7 @@
 import { modalOk, modalClosed } from "state/redux/modals/actions";
 import { NAME } from "state/redux/createRoomModal/consts";
 import { apolloClient } from "services/gateway/graphql/initGraphqlClient";
-import { createRoom } from "services/mutations/createRoom";
+import { createRoomMutation } from "services/mutations/createRoomMutation";
 import { getFormValues } from "state/redux/createRoomModal/selectors/getFormValues";
 
 export const submitCreateRoomForm = (store) => (next) => (action) => {
@@ -15,7 +15,7 @@ export const submitCreateRoomForm = (store) => (next) => (action) => {
       console.log({ apolloClient });
 
       apolloClient
-        .mutate({ mutation: createRoom, variables: { name, mode } })
+        .mutate({ mutation: createRoomMutation, variables: { name, mode } })
         .then(({ data }) => {
           console.log({ data });
           store.dispatch(modalClosed({ modal: NAME }));

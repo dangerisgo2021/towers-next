@@ -1,6 +1,6 @@
 import { roomResetClicked } from "state/redux/room/actions";
 import { apolloClient } from "services/gateway/graphql/initGraphqlClient";
-import { resetRoomMatch as resetRoomMatchMutation } from "services/mutations/resetRoomMatch";
+import { resetRoomMatchMutation } from "services/mutations/resetRoomMatchMutation";
 
 export const resetRoomMatch = () => (next) => (action) => {
   next(action);

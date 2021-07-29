@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const applyMoveToMatch = gql`
+export const applyMoveToMatchMutation = gql`
   mutation applyMoveToMatch(
     $roomId: ID
     $player: Int

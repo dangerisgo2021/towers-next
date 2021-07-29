@@ -21,6 +21,10 @@ export const roomPageQuery = gql`
           crowns
         }
       }
+      selectedCells {
+        cellId
+        player
+      }
       match {
         id
         created

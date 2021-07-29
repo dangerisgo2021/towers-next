@@ -4,7 +4,7 @@ import { collapseSider, expandSider, siderBreak } from "./actions";
 
 export const reducer = new ReducerBuilder()
   .setInitialState({
-    collapsed: false,
+    collapsed: true,
     locked: false,
   })
   .addReducer(

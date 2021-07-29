@@ -23,7 +23,7 @@ export const Room = () => {
 
   if (!room) return <Error error="No Room Found" />;
 
-  const { started, players } = room;
+  const { started, players, selectedCells } = room;
   const player =
     players && players.findIndex(({ profile }) => profile?.userId === userId);
   console.log({ player, userId, players });
@@ -35,6 +35,7 @@ export const Room = () => {
             match: room.match,
             moveNames,
             player,
+            selectedCells,
             currentPlayer: room.currentPlayer,
             victoryProgress: room.victoryProgress,
           }}

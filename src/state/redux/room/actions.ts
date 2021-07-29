@@ -32,3 +32,8 @@ export const roomResetClicked = actionCreatorFactory({
   namespace,
   type: "roomResetClicked",
 });
+
+export const playerSelectedCell = actionCreatorFactory({
+  namespace,
+  type: "playerSelectedCell",
+});

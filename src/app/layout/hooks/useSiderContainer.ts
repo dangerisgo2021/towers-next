@@ -15,7 +15,6 @@ export const useSiderContainer = (ref) => {
   const handleBreak = (broken) => {
     dispatch(siderBreak(broken));
   };
-  const isLocked = useSelector(getIsSiderLocked);
 
   React.useEffect(() => {
     /**
@@ -40,7 +39,7 @@ export const useSiderContainer = (ref) => {
 
   return {
     isCollapsed: useSelector(getIsSiderCollapsed),
-    isLocked,
+    isLocked: useSelector(getIsSiderLocked),
     handleBreak,
   };
 };

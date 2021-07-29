@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const createRoom = gql`
+export const createRoomMutation = gql`
   mutation createRoom($name: String, $mode: Mode) {
     createRoom(input: { name: $name, mode: $mode }) {
       id

@@ -16,6 +16,7 @@ import { collapseSliderOnSideNavItemClicked } from "state/redux/sider/middleware
 import { startSession } from "state/redux/auth/middleware/startSession";
 import { getLatestSession } from "state/redux/auth/middleware/getLatestSession";
 import { endSession } from "state/redux/auth/middleware/endSession";
+import { setSelectedCell } from "state/redux/room/middleware/setSelectedCell";
 
 export const middleware = [
   loggerMiddleware,
@@ -36,4 +37,5 @@ export const middleware = [
   startSession,
   getLatestSession,
   endSession,
+  setSelectedCell,
 ];
