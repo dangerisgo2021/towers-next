@@ -8,6 +8,7 @@ export const reducer = new ReducerBuilder()
       local: { href: "/local", displayText: "Pass & Play", id: "local" },
       profile: { href: "/profile", displayText: "Profile", id: "profile" },
       rules: { href: "/rules", displayText: "Rules", id: "rules" },
+      games: { href: "/games", displayText: "My Games", id: "games", requireAuthentication: true },
     },
   })
   .build();
