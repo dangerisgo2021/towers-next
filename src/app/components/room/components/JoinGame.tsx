@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Row, Progress } from "antd";
-import { useJoinGameContainer } from "app/components/room/hooks/useJoinGameContianer";
+import { useJoinGameContainer } from "app/components/room/hooks/useJoinGameContainer";
 
 const defaultGameConfig = { minPlayers: 2 };
 
-export const JoinGame = ({ gameConfig = defaultGameConfig, players }) => {
+export const JoinGame = ({ gameConfig = defaultGameConfig, players = undefined }) => {
   const {
     joinRoomClicked,
     leaveRoomClicked,
@@ -26,12 +26,7 @@ export const JoinGame = ({ gameConfig = defaultGameConfig, players }) => {
       >
         Join Game
       </Button>
-      <Progress
-        style={{ margin: "0 2vw" }}
-        type="circle"
-        percent={percent}
-
-      />
+      <Progress style={{ margin: "0 2vw" }} type="circle" percent={percent} />
       <Button
         disabled={isLeaveDisabled}
         onClick={() => {
